@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverCanvas;
     public GameObject scoreCanvas;
     public GroundManager groundManager;
+    public static float speedOfPipe;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
         hardButton.onClick.AddListener(() => StartGame("Hard"));
         playAgainButton.onClick.AddListener(() => RestartGame());
         homeButton.onClick.AddListener(() => GoHome());
-
+        speedOfPipe = 1.7f;
     }
 
     private void StartGame(string difficulty)
