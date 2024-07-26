@@ -14,6 +14,7 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        string curScore = score.ToString();
+        GetComponent<UnityEngine.UI.Text>().text = $"{curScore} / 14";
     }
 }
