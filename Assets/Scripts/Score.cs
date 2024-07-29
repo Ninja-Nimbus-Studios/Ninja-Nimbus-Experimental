@@ -15,6 +15,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         string curScore = score.ToString();
-        GetComponent<UnityEngine.UI.Text>().text = $"{curScore} / 14";
+        GetComponent<UnityEngine.UI.Text>().text = $"{curScore}m";
     }
 }

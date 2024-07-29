@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class AddScore : MonoBehaviour
 {
-    public GameObject coin;
+    public GameObject cloud;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Score.score++;
-        coin.gameObject.SetActive(false);
-        Debug.Log($"{coin.name}, {collision.gameObject.name}");
     }
 }
