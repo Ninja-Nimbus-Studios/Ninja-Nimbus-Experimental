@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         hardButton.onClick.AddListener(() => SecretAddScore());
         playAgainButton.onClick.AddListener(() => RestartGame());
         homeButton.onClick.AddListener(() => GoHome());
-        nextButton.onClick.AddListener(() => RestartGame());
+        nextButton.onClick.AddListener(() => NextStage());
         speedOfPipe = 1.7f;
         Debug.Log("GameManager: " + speedOfPipe);
     }
@@ -70,11 +70,14 @@ public class GameManager : MonoBehaviour
     public void EndOfGame()
     {
         Debug.Log("End of Game is running.");
+        groundManager.StopGround();
         roundScore = Score.score;
         if (roundScore == 14)
         {
-            NextStage();
-        } else 
+            scoreCanvas.SetActive(false);
+            nextCanvas.SetActive(true);
+        }
+        else 
         {
             GameOver();
         }
@@ -83,12 +86,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PlayerPrefs.SetString("Status", "GameOver");
+        Time.timeScale = 0;
         gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
         scoreCanvas.SetActive(false);
-        Time.timeScale = 0;
-
-        groundManager.StopGround();
         // SceneManager.LoadScene("NimbusScene");
     }
 
@@ -96,9 +97,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Move to next stage!");
         PlayerPrefs.SetString("Status", "NextStage");
-        scoreCanvas.SetActive(false);
-        nextCanvas.SetActive(true);
         Time.timeScale = 0;
+        SceneManager.LoadScene(1);
     }
 
 }
