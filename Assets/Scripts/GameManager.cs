@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public Button startButton;
     public Button hardButton;
     public Button playAgainButton;
-    public Button homeButton;
-    public Button nextButton;
+    // public Button homeButton;
+    // public Button nextButton;
     public GameObject gameStartCanvas;
     public GameObject gameOverCanvas;
     public GameObject nextCanvas;
@@ -19,20 +19,28 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeGame();
+    }
+
+    private void InitializeGame()
+    {
         // Set Canvas
-        gameStartCanvas.SetActive(true);
+        gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
-        scoreCanvas.SetActive(false);
-        nextCanvas.SetActive(false);
+        scoreCanvas.SetActive(true);
+        // nextCanvas.SetActive(false);
 
         // Assign the buttons to their respective functions
         startButton.onClick.AddListener(() => StartGame("Easy"));
         hardButton.onClick.AddListener(() => SecretAddScore());
         playAgainButton.onClick.AddListener(() => RestartGame());
-        homeButton.onClick.AddListener(() => GoHome());
-        nextButton.onClick.AddListener(() => NextStage());
+        // homeButton.onClick.AddListener(() => GoHome());
+        // nextButton.onClick.AddListener(() => NextStage());
         speedOfPipe = 1.7f;
         Debug.Log("GameManager: " + speedOfPipe);
+
+        // Reset time scale
+        Time.timeScale = 1;
     }
 
     private void SecretAddScore()
@@ -56,15 +64,16 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         Debug.Log("Restart Game");
+        Debug.Log($"{Time.timeScale}");
         Debug.Log($"Scene Index is: {SceneManager.GetActiveScene().buildIndex}");
-        Time.timeScale = 0;
-        SceneManager.LoadScene("NimbusScene");
+        SceneManager.LoadScene("Stage 2-1");
+        InitializeGame();
     }
 
     private void GoHome()
     {
         SceneManager.LoadScene("NimbusScene");
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void EndOfGame()
@@ -86,7 +95,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PlayerPrefs.SetString("Status", "GameOver");
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
         scoreCanvas.SetActive(false);

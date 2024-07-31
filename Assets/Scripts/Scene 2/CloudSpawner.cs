@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class CloudSpawner : MonoBehaviour
@@ -13,35 +14,33 @@ public class CloudSpawner : MonoBehaviour
     private int column;
     private float horizontalPos;
     private float prevPos;
+    const float RIGHT_COLUMN = 3.1f;
+    const float LEFT_COLUMN = -3.1f;
+    const float CLOUD_DISTANCE = 3.1f; // CLOUD_DISTANCE should have same y as Nimbus vertical jump distance
+    const float CLOUD_STARTING_HEIGHT = -0.2f;
+    
     // Start is called before the first frame update
     void Start()
     {
-        prevHeight = -3.1f;
-        prevPos = -3.1f;
+        prevHeight = newHeight = CLOUD_STARTING_HEIGHT; // starting height
+        prevPos = 1f;
         for (int i = 0; i < spawnCount; i++)
         {
             GameObject newCloud = Instantiate(cloud); // create new pipe
-            // column = Random.Range(0,2);
-            // if(column == 0)
-            // {
-            //     horizontalPos = 3f;
-            // }
-            // else
-            // {
-            //     horizontalPos = -3f;
-            // }
 
-            if(prevPos == 3.1f)
+            // Determine x coordinate for newly spawned cloud
+            if(prevPos == RIGHT_COLUMN)
             {
-                horizontalPos = -3.1f;
+                horizontalPos = LEFT_COLUMN;
             }
-            else 
+            else
             {
-                horizontalPos = 3.1f;
+                horizontalPos = RIGHT_COLUMN;
             }
-            newHeight = prevHeight + 3.1f;
+
             newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0); // randomize height of pipe
             prevHeight = newHeight;
+            newHeight = prevHeight + CLOUD_DISTANCE;
             prevPos = horizontalPos;
         }
     }
