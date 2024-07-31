@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class CloudSpawner : MonoBehaviour
 {
-    public float spawnCount = 20; // the time interval for spawn
+    const int EASY_SPAWNCOUNT = 20; // number of spawns
+    const int MID_SPAWNCOUNT = 40; // number of spawns
     private float timer = 0;
     public GameObject cloud; //reference to pipe
     private float prevHeight;
     private float newHeight;
     public GameObject nimbus;
     private int column;
+    private const int MIN_COLUMN = 0;
+    private const int MAX_COLUMN = 2;
     private float horizontalPos;
     private float prevPos;
     const float RIGHT_COLUMN = 3.1f;
@@ -24,7 +27,18 @@ public class CloudSpawner : MonoBehaviour
     {
         prevHeight = newHeight = CLOUD_STARTING_HEIGHT; // starting height
         prevPos = 1f;
-        for (int i = 0; i < spawnCount; i++)
+        EasySpawnCloud(EASY_SPAWNCOUNT);
+        MiddleSpawnCloud(MID_SPAWNCOUNT);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
+    void EasySpawnCloud(int amount)
+    {
+        for (int i = 0; i < amount; i++)
         {
             GameObject newCloud = Instantiate(cloud); // create new pipe
 
@@ -45,9 +59,28 @@ public class CloudSpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void MiddleSpawnCloud(int amount)
     {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject newCloud = Instantiate(cloud); // create new pipe
+
+            // random column decider
+            column = Random.Range(MIN_COLUMN, MAX_COLUMN);
+            // Determine x coordinate for newly spawned cloud
+            if(column == 0)
+            {
+                horizontalPos = LEFT_COLUMN;
+            }
+            else
+            {
+                horizontalPos = RIGHT_COLUMN;
+            }
+
+            newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0); // randomize height of pipe
+            prevHeight = newHeight;
+            newHeight = prevHeight + CLOUD_DISTANCE;
+        }
     }
 }
  

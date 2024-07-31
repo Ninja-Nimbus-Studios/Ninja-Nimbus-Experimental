@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,44 +22,30 @@ public class NimbusJump : MonoBehaviour
     private Vector3 rightTarget = new Vector3(6.14f, 3.11f, 0f);
     public Transform leftPoint;
     private Vector3 leftTarget = new Vector3(-6.14f, 3.11f, 0f);
+    private Vector3 upTarget = new Vector3(0f, 3.11f, 0f);
     private Vector3 targetPosition;
     private float MAX_DISTANCE = 4.39f;
     private bool isMoving = false;
-    private bool jumpRight = false; 
+    private bool leftPressed = false;
+    private bool rightPressed = false;
+    private bool jumpUp = false; 
     // Start is called before the first frame update
     void Start()
     {
         if(left != null)
         {
-            left.onClick.AddListener(() => JumpRight());
+            left.onClick.AddListener(() => OnLeftPressed());
         }
 
         if(right != null)
         {
-            right.onClick.AddListener(() => JumpLeft());
+            right.onClick.AddListener(() => OnRightPressed());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log($"{rightPoint.position}, {right}, {leftPoint.position}, {leftPoint}");
-        // Debug.Log($"Character Position: {transform.position}");
-        // Check if the object has landed and should stick
-        // if (isStuck && rb.bodyType != RigidbodyType2D.Static)
-        // {
-        //     rb.velocity = Vector2.zero;
-        //     rb.bodyType = RigidbodyType2D.Static;
-        // }
-        if(jumpRight)
-        {
-            targetPosition = prevPosition + rightTarget;
-        }
-        else
-        {
-            targetPosition = prevPosition + leftTarget;
-        }
-
         if (isMoving)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
@@ -66,6 +53,7 @@ public class NimbusJump : MonoBehaviour
             if (Vector2.Distance(transform.position, targetPosition) <= 0.05f)
             {
                 isMoving = false;
+                jumpUp = false;
                 // Debug.Log("Reached target position");
             }
         }
@@ -91,46 +79,67 @@ public class NimbusJump : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
+    void OnLeftPressed()
+    {
+        leftPressed = true;
+        Debug.Log("Invoking from Left");
+        Invoke("BothButtonPress", 0.1f);
+        Debug.Log("Finished Invoking from left");
+    }
+
+    void OnRightPressed()
+    {
+        rightPressed = true;
+        Debug.Log("Invoking from Right");
+        Invoke("BothButtonPress", 0.1f);
+        Debug.Log("Finished Invoking from Right");
+    }
+
+    private void BothButtonPress()
+    {
+        if(rightPressed && leftPressed)
+        {
+            JumpUp();
+        }
+        else if(!rightPressed && !jumpUp)
+        {
+            JumpLeft();
+        }
+        else if(!leftPressed && !jumpUp)
+        {
+            JumpRight();
+        }
+
+        // Reset button states after checking
+        leftPressed = false;
+        rightPressed = false;
+    }
     private void JumpRight()
     {
-        // moveX = 6.2f;
-        // moveY = 3.1f;
-        // rightPoint.position = transform.position + new Vector3(moveX, moveY);
-        // Jump(moveX, moveY);
+        Debug.Log("Right Clicked!");
         SetCurrentPosition();
+        targetPosition = prevPosition + rightTarget;
         isMoving = true;
-        jumpRight = true;
     }
 
     private void JumpLeft()
     {
-        // moveX = -6.2f;
-        // moveY = 3.1f;
-        // leftPoint.position = transform.position + new Vector3(moveX, moveY);
-        // Jump(moveX, moveY);
+        Debug.Log("Left Clicked!");
         SetCurrentPosition();
+        targetPosition = prevPosition + leftTarget;
         isMoving = true;
-        jumpRight = false;
+    }
+
+    private void JumpUp()
+    {
+        Debug.Log("Up Clicked!");
+        SetCurrentPosition();
+        targetPosition = prevPosition + upTarget;
+        isMoving = true;
+        jumpUp = true;
     }
     private void SetCurrentPosition()
     {
         prevPosition = transform.position;
-    }
-    private void Jump(float x, float y)
-    {
-        if (rb != null)
-        {
-            // Apply the force to make the object jump left up diagonally
-            rb.velocity = Vector2.zero; // Reset current velocity
-            rb.AddForce(new Vector2(moveX, moveY), ForceMode2D.Impulse);
-            isJumping = true;
-            isStuck = false;
-        }
-    }
-
-    private void JumpTowards(Transform movePoint)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        Debug.Log($"{transform.position}, {movePoint.position}, {moveSpeed * Time.deltaTime}");
     }
 }
