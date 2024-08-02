@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CloudSpawner : MonoBehaviour
@@ -17,6 +20,12 @@ public class CloudSpawner : MonoBehaviour
     private const int MAX_COLUMN = 2;
     private float horizontalPos;
     private float prevPos;
+
+    public static List<Vector3> cloudCoordinates = new List<Vector3>();
+    public static List<Vector3> midCloudCoordinates = new List<Vector3>();
+    public static int MAX_JUMP_COUNT = 0;
+
+    // Constant Vairables 
     const float RIGHT_COLUMN = 3.1f;
     const float LEFT_COLUMN = -3.1f;
     const float CLOUD_DISTANCE = 3.1f; // CLOUD_DISTANCE should have same y as Nimbus vertical jump distance
@@ -25,15 +34,36 @@ public class CloudSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        prevHeight = newHeight = CLOUD_STARTING_HEIGHT; // starting height
-        prevPos = 1f;
-        EasySpawnCloud(EASY_SPAWNCOUNT);
-        MiddleSpawnCloud(MID_SPAWNCOUNT);
+        InitializeCloudSpawner();    
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    void InitializeCloudSpawner()
+    {
+        // Clear previous coordinates from list
+        cloudCoordinates.Clear();
+        midCloudCoordinates.Clear();
+
+        // Reset Variables
+        prevHeight = newHeight = CLOUD_STARTING_HEIGHT; // starting height
+        prevPos = 1f;
+
+        // Spawn Clouds for different levels
+        EasySpawnCloud(EASY_SPAWNCOUNT);
+        MiddleSpawnCloud(MID_SPAWNCOUNT);
+
+        // Log for debugging purposes
+        Debug.Log("*****");
+        for(int i = 0; i < midCloudCoordinates.Count; i++)
+        {
+            Console.WriteLine(midCloudCoordinates[i]);
+        }
+
+        MAX_JUMP_COUNT = cloudCoordinates.Count;
     }
 
     void EasySpawnCloud(int amount)
@@ -52,7 +82,8 @@ public class CloudSpawner : MonoBehaviour
                 horizontalPos = RIGHT_COLUMN;
             }
 
-            newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0); // randomize height of pipe
+            newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
+            cloudCoordinates.Add(newCloud.transform.position);
             prevHeight = newHeight;
             newHeight = prevHeight + CLOUD_DISTANCE;
             prevPos = horizontalPos;
@@ -65,8 +96,9 @@ public class CloudSpawner : MonoBehaviour
         {
             GameObject newCloud = Instantiate(cloud); // create new pipe
 
-            // random column decider
-            column = Random.Range(MIN_COLUMN, MAX_COLUMN);
+            // Random column decider
+            column = UnityEngine.Random.Range(MIN_COLUMN, MAX_COLUMN);
+            Debug.Log(column);
             // Determine x coordinate for newly spawned cloud
             if(column == 0)
             {
@@ -77,7 +109,17 @@ public class CloudSpawner : MonoBehaviour
                 horizontalPos = RIGHT_COLUMN;
             }
 
-            newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0); // randomize height of pipe
+            Vector3 cloudPosition = new Vector3(horizontalPos, newHeight, 0);
+
+            newCloud.transform.position = cloudPosition;
+            midCloudCoordinates.Add(cloudPosition); // midCloudCoordinates list is used for debugging
+            cloudCoordinates.Add(cloudPosition);
+
+            // Log for debugging purposes
+            Debug.Log(newCloud.transform.position);
+            Debug.Log("******");
+
+            // Update variables
             prevHeight = newHeight;
             newHeight = prevHeight + CLOUD_DISTANCE;
         }

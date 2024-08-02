@@ -25,11 +25,20 @@ public class NimbusJump : MonoBehaviour
     private Vector3 upTarget = new Vector3(0f, 3.11f, 0f);
     private Vector3 targetPosition;
     private float MAX_DISTANCE = 4.39f;
-    private bool isMoving = false;
     private bool leftPressed = false;
     private bool rightPressed = false;
-    private bool jumpUp = false; 
-    // Start is called before the first frame update
+    private bool bothButtonsPressed = false;
+    private bool jumpUp = false;
+    
+    // dying mechanic
+    public GameManager gameManager;
+    public static int scoreBeforeJump;
+    public static int scoreAfterJump;
+    public static int jumpCount = 0; // this variable keep scount of how many times it jumped which is the same as cloud index
+    public const string DIRECTION_U = "up";
+    public const string DIRECTION_L = "left";
+    public const string DIRECTION_R = "right";
+
     void Start()
     {
         if(left != null)
@@ -41,20 +50,21 @@ public class NimbusJump : MonoBehaviour
         {
             right.onClick.AddListener(() => OnRightPressed());
         }
+        scoreBeforeJump = scoreAfterJump = Score.score;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isMoving)
+        if (PlayerPrefs.GetString("Status") == GameManager.STATUS_JUMP)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             // Check if the position has reached the target
-            if (Vector2.Distance(transform.position, targetPosition) <= 0.05f)
+            if (transform.position == CloudSpawner.cloudCoordinates[jumpCount])
             {
-                isMoving = false;
-                jumpUp = false;
-                // Debug.Log("Reached target position");
+                // jumpUp = false;
+                PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
+                jumpCount++;
+                bothButtonsPressed = false;
             }
         }
     }
@@ -81,62 +91,182 @@ public class NimbusJump : MonoBehaviour
     }
     void OnLeftPressed()
     {
-        leftPressed = true;
-        Debug.Log("Invoking from Left");
-        Invoke("BothButtonPress", 0.1f);
-        Debug.Log("Finished Invoking from left");
+        Debug.Log("Left Pressed");
+        // Check if this jump click was done mid jump
+        if(!IsDoubleJump())
+        {
+            leftPressed = true;
+            Invoke("BothButtonPress", 0.1f);
+        }
+        else
+        {
+            Debug.Log("You lost: Double Jump not allowed!");
+            gameManager.GameOver();
+        }
     }
 
     void OnRightPressed()
     {
-        rightPressed = true;
-        Debug.Log("Invoking from Right");
-        Invoke("BothButtonPress", 0.1f);
-        Debug.Log("Finished Invoking from Right");
+        Debug.Log("Right Pressed");
+        // Check if this jump click was done mid jump
+        if(!IsDoubleJump())
+        {
+            rightPressed = true;
+            Invoke("BothButtonPress", 0.1f);
+        }
+        else
+        {
+            Debug.Log("You lost: Double Jump not allowed!");
+            gameManager.GameOver();
+        }
     }
 
+    /*
+        BothButtonPress checks for if the both of the jump buttons were clicked at the same time or not.
+        Jump function is not called and GameOver is called if user picks the wrong direction to jump.
+    */    
     private void BothButtonPress()
     {
-        if(rightPressed && leftPressed)
-        {
-            JumpUp();
+        if (bothButtonsPressed){
+            return; // Prevent multiple invocations
         }
-        else if(!rightPressed && !jumpUp)
+        bothButtonsPressed = true;
+
+        if(rightPressed && leftPressed && IsDirectionCorrect(DIRECTION_U))
         {
-            JumpLeft();
+            Debug.Log("Jump Up!");
+            JumpTowardsTarget();
         }
-        else if(!leftPressed && !jumpUp)
+        else if(!rightPressed && IsDirectionCorrect(DIRECTION_L))
         {
-            JumpRight();
+            Debug.Log("Jump Left!");
+            JumpTowardsTarget();
+        }
+        else if(!leftPressed && IsDirectionCorrect(DIRECTION_R))
+        {
+            Debug.Log("Jump Right!");
+            JumpTowardsTarget();
+        }
+        else
+        {
+            if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMECLEAR)
+            {
+                Debug.Log("You won!");
+                gameManager.GameCleared();
+
+            }
+            else
+            {
+                Debug.Log("You lost: wrong direction to jump!");
+                gameManager.GameOver();
+            }
         }
 
         // Reset button states after checking
         leftPressed = false;
         rightPressed = false;
     }
+
+    /*
+        Triggers Right Jump
+    */
     private void JumpRight()
     {
         Debug.Log("Right Clicked!");
         SetCurrentPosition();
         targetPosition = prevPosition + rightTarget;
-        isMoving = true;
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
     }
 
+    /*
+        Triggers Left Jump
+    */
     private void JumpLeft()
     {
         Debug.Log("Left Clicked!");
         SetCurrentPosition();
         targetPosition = prevPosition + leftTarget;
-        isMoving = true;
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
     }
 
+    /*
+        Triggers Up Jump
+    */
     private void JumpUp()
     {
         Debug.Log("Up Clicked!");
         SetCurrentPosition();
         targetPosition = prevPosition + upTarget;
-        isMoving = true;
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
         jumpUp = true;
+    }
+
+    /*
+        Triggers jump action towards the correct target
+    */
+    private void JumpTowardsTarget()
+    {
+        // Debug.Log("Nimbus is jumping towards correct direction!");
+        targetPosition = CloudSpawner.cloudCoordinates[jumpCount];
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
+    }
+
+    /*
+        Checks if the jump direction is the correct direction or not.
+        Input: direction to check
+        Return: boolean
+    */
+    private bool IsDirectionCorrect(string direction)
+    {
+        if(CloudSpawner.MAX_JUMP_COUNT > jumpCount)
+        {
+            var nextCoordinate = CloudSpawner.cloudCoordinates[jumpCount];
+            Debug.Log($"Current cloud:{nextCoordinate}, Next Cloud:{CloudSpawner.cloudCoordinates[jumpCount+1]}");
+            if(direction == DIRECTION_U)
+            {
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                return nextCoordinate.x == transform.position.x;
+            }
+            else if(direction == DIRECTION_L)
+            {
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                return nextCoordinate.x < transform.position.x;
+            }
+            else
+            {
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                return nextCoordinate.x > transform.position.x;
+            }
+        }
+        else {
+            Debug.Log("jumpCount at max!");
+            PlayerPrefs.SetString("Status", GameManager.STATUS_GAMECLEAR);
+            return false;
+        }
+    }
+
+    /*
+        Checks if jump is called while Nimbus is jumping
+        Return: boolean
+    */
+    private bool IsDoubleJump()
+    {
+        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_JUMP)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     private void SetCurrentPosition()
     {

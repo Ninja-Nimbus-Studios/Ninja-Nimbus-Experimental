@@ -2191,6 +2191,7 @@ MonoBehaviour:
   rb: {fileID: 1676301106}
   rightPoint: {fileID: 330082124}
   leftPoint: {fileID: 1863764891}
+  gameManager: {fileID: 1271331636}
 --- !u!1 &1863764890
 GameObject:
   m_ObjectHideFlags: 0

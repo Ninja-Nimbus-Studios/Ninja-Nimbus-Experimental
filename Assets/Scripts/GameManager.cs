@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour
     public static float speedOfPipe;
     private int roundScore;
 
+    // Status constants
+    public const String STATUS_JUMP = "Jumping";
+    public const String STATUS_REST = "Resting";
+    public const String STATUS_GAMECLEAR = "GameClear";
+    public const String STATUS_GAMEOVER = "GameOver";
+
     private void Start()
     {
         InitializeGame();
@@ -28,19 +35,22 @@ public class GameManager : MonoBehaviour
         gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         scoreCanvas.SetActive(true);
-        // nextCanvas.SetActive(false);
 
         // Assign the buttons to their respective functions
         startButton.onClick.AddListener(() => StartGame("Easy"));
         hardButton.onClick.AddListener(() => SecretAddScore());
         playAgainButton.onClick.AddListener(() => RestartGame());
-        // homeButton.onClick.AddListener(() => GoHome());
-        // nextButton.onClick.AddListener(() => NextStage());
         speedOfPipe = 1.7f;
         Debug.Log("GameManager: " + speedOfPipe);
 
         // Reset time scale
         Time.timeScale = 1;
+
+        // Reset jump count
+        NimbusJump.jumpCount = 0;
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", STATUS_REST);
     }
 
     private void SecretAddScore()
@@ -64,16 +74,25 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         Debug.Log("Restart Game");
-        Debug.Log($"{Time.timeScale}");
-        Debug.Log($"Scene Index is: {SceneManager.GetActiveScene().buildIndex}");
         SceneManager.LoadScene("Stage 2-1");
-        InitializeGame();
+        var status = PlayerPrefs.GetString("Status");
+        if(status == STATUS_GAMEOVER)
+        {
+            InitializeGame();
+        }
+        else
+        {
+            Debug.LogError($"The current game status doesn't allow RestartGame(). Current status is {status}");
+        }
     }
-
-    private void GoHome()
+    public void CheckSuccessfulJump()
     {
-        SceneManager.LoadScene("NimbusScene");
-        Time.timeScale = 0f;
+        Debug.Log("Check Successful Jump!");
+        NimbusJump.scoreAfterJump = Score.score;
+        Debug.Log($"Before:{NimbusJump.scoreBeforeJump}, After:{NimbusJump.scoreAfterJump}");
+        if(NimbusJump.scoreAfterJump == NimbusJump.scoreBeforeJump){
+            GameOver();
+        }
     }
 
     public void EndOfGame()
@@ -94,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        Debug.Log("Game Over!");
         PlayerPrefs.SetString("Status", "GameOver");
         Time.timeScale = 0f;
         gameStartCanvas.SetActive(false);
@@ -102,12 +122,17 @@ public class GameManager : MonoBehaviour
         // SceneManager.LoadScene("NimbusScene");
     }
 
+    public void GameCleared()
+    {
+        Debug.Log("Game Cleared!");
+        Time.timeScale = 0f;
+        RestartGame();
+    }
+
     public void NextStage()
     {
         Debug.Log("Move to next stage!");
-        PlayerPrefs.SetString("Status", "NextStage");
         Time.timeScale = 0;
         SceneManager.LoadScene(1);
     }
-
 }
