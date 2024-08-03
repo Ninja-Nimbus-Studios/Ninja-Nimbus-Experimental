@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AddScore : MonoBehaviour
+public class CloudMechanic : MonoBehaviour
 {
     public GameObject point;
     public GameObject cloud;
+    public GameObject alternateCloudPrefab;
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Score.score++;
@@ -16,5 +19,14 @@ public class AddScore : MonoBehaviour
     {
         point.gameObject.SetActive(false);
         cloud.gameObject.SetActive(false);
+    }
+
+    public void ChangeCloud()
+    {
+        // Instantiate the alternate cloud at the current cloud's position and rotation
+        Instantiate(alternateCloudPrefab, transform.position, transform.rotation);
+        
+        // Destroy the current cloud
+        Destroy(gameObject);
     }
 }

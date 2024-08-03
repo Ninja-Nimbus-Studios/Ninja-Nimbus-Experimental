@@ -57,11 +57,11 @@ public class CloudSpawner : MonoBehaviour
         MiddleSpawnCloud(MID_SPAWNCOUNT);
 
         // Log for debugging purposes
-        Debug.Log("*****");
-        for(int i = 0; i < midCloudCoordinates.Count; i++)
-        {
-            Console.WriteLine(midCloudCoordinates[i]);
-        }
+        // Debug.Log("*****");
+        // for(int i = 0; i < midCloudCoordinates.Count; i++)
+        // {
+        //     Console.WriteLine(midCloudCoordinates[i]);
+        // }
 
         MAX_JUMP_COUNT = cloudCoordinates.Count;
     }
@@ -98,7 +98,7 @@ public class CloudSpawner : MonoBehaviour
 
             // Random column decider
             column = UnityEngine.Random.Range(MIN_COLUMN, MAX_COLUMN);
-            Debug.Log(column);
+            // Debug.Log(column);
             // Determine x coordinate for newly spawned cloud
             if(column == 0)
             {
@@ -112,12 +112,12 @@ public class CloudSpawner : MonoBehaviour
             Vector3 cloudPosition = new Vector3(horizontalPos, newHeight, 0);
 
             newCloud.transform.position = cloudPosition;
-            midCloudCoordinates.Add(cloudPosition); // midCloudCoordinates list is used for debugging
+            // midCloudCoordinates.Add(cloudPosition); // midCloudCoordinates list is used for debugging
             cloudCoordinates.Add(cloudPosition);
 
             // Log for debugging purposes
-            Debug.Log(newCloud.transform.position);
-            Debug.Log("******");
+            // Debug.Log(newCloud.transform.position);
+            // Debug.Log("******");
 
             // Update variables
             prevHeight = newHeight;

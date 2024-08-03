@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public static int score = 0;
+    public Text textField;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,13 @@ public class Score : MonoBehaviour
     void Update()
     {
         string curScore = score.ToString();
-        GetComponent<UnityEngine.UI.Text>().text = $"{curScore}m";
+        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMECLEAR)
+        {
+            textField.text = "You are at the top!";
+        }
+        else
+        {
+            textField.text = $"{curScore}m";
+        }
     }
 }

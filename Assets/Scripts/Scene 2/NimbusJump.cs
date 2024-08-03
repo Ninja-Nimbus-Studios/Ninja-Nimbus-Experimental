@@ -8,7 +8,7 @@ public class NimbusJump : MonoBehaviour
 {
     public Button left;
     public Button right;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 50f;
     public Rigidbody2D rb;
 
     private float moveX;
@@ -39,6 +39,9 @@ public class NimbusJump : MonoBehaviour
     public const string DIRECTION_L = "left";
     public const string DIRECTION_R = "right";
 
+    // UI changes from jump
+    // public CloudMechanic cloudMechanic;
+
     void Start()
     {
         if(left != null)
@@ -51,6 +54,7 @@ public class NimbusJump : MonoBehaviour
             right.onClick.AddListener(() => OnRightPressed());
         }
         scoreBeforeJump = scoreAfterJump = Score.score;
+        moveSpeed = 55f;
     }
 
     void Update()
@@ -58,10 +62,12 @@ public class NimbusJump : MonoBehaviour
         if (PlayerPrefs.GetString("Status") == GameManager.STATUS_JUMP)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            // Debug.Log($"{moveSpeed}, {targetPosition}");
             // Check if the position has reached the target
             if (transform.position == CloudSpawner.cloudCoordinates[jumpCount])
             {
                 // jumpUp = false;
+                // cloudMechanic.ChangeCloud();
                 PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
                 jumpCount++;
                 bothButtonsPressed = false;
@@ -229,7 +235,6 @@ public class NimbusJump : MonoBehaviour
         if(CloudSpawner.MAX_JUMP_COUNT > jumpCount)
         {
             var nextCoordinate = CloudSpawner.cloudCoordinates[jumpCount];
-            Debug.Log($"Current cloud:{nextCoordinate}, Next Cloud:{CloudSpawner.cloudCoordinates[jumpCount+1]}");
             if(direction == DIRECTION_U)
             {
                 Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
