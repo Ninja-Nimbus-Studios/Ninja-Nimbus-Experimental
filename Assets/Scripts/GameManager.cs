@@ -1,104 +1,96 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button startButton;
-    public Button hardButton;
     public Button playAgainButton;
-    public Button homeButton;
-    public Button nextButton;
+    // public Button homeButton;
+    // public Button nextButton;
     public GameObject gameStartCanvas;
     public GameObject gameOverCanvas;
-    public GameObject nextCanvas;
-    public GameObject scoreCanvas;
-    public GroundManager groundManager;
-    public static float speedOfPipe;
+    public GameObject gameInterface;
+    public GameObject gameClearCanvas;
+    public GameObject gameStatistics;
     private int roundScore;
+
+    // Status constants
+    public const String STATUS_JUMP = "Jumping";
+    public const String STATUS_REST = "Resting";
+    public const String STATUS_GAMECLEAR = "GameClear";
+    public const String STATUS_GAMEOVER = "GameOver";
 
     private void Start()
     {
-        // Set Canvas
-        gameStartCanvas.SetActive(true);
-        gameOverCanvas.SetActive(false);
-        scoreCanvas.SetActive(false);
-        nextCanvas.SetActive(false);
+        InitializeGame();
 
         // Assign the buttons to their respective functions
-        startButton.onClick.AddListener(() => StartGame("Easy"));
-        hardButton.onClick.AddListener(() => SecretAddScore());
         playAgainButton.onClick.AddListener(() => RestartGame());
-        homeButton.onClick.AddListener(() => GoHome());
-        nextButton.onClick.AddListener(() => NextStage());
-        speedOfPipe = 1.7f;
-        Debug.Log("GameManager: " + speedOfPipe);
     }
 
-    private void SecretAddScore()
+    /*
+        Game initializes 
+    */
+    public void InitializeGame()
     {
-        Score.score++;
-        hardButton.gameObject.SetActive(false);
-    }
-    private void StartGame(string difficulty)
-    {
-        // Set the difficulty level
-        PlayerPrefs.SetString("Difficulty", difficulty);
-        PlayerPrefs.SetString("Status", "Start");
-        Debug.Log($"Game will start with {difficulty}");
-    
         // Set Canvas
+        gameInterface.SetActive(true);
         gameStartCanvas.SetActive(false);
-        scoreCanvas.SetActive(true);
+        gameOverCanvas.SetActive(false);
+        gameClearCanvas.SetActive(false);
+        gameStatistics.SetActive(true);
+
+        // Reset time scale
         Time.timeScale = 1;
+
+        // Reset jump count
+        NimbusJump.jumpCount = 0;
+
+        // Set Game Status
+        PlayerPrefs.SetString("Status", STATUS_REST);
     }
 
-    private void RestartGame()
+    /*
+        Game Restarts from game over state which calls initialize game.
+        This function is often times part of OnClick on PlayAgain Button in different canvas.
+    */
+    public void RestartGame()
     {
         Debug.Log("Restart Game");
-        Debug.Log($"Scene Index is: {SceneManager.GetActiveScene().buildIndex}");
-        Time.timeScale = 0;
-        SceneManager.LoadScene("NimbusScene");
-    }
-
-    private void GoHome()
-    {
-        SceneManager.LoadScene("NimbusScene");
-        Time.timeScale = 0;
-    }
-
-    public void EndOfGame()
-    {
-        Debug.Log("End of Game is running.");
-        groundManager.StopGround();
-        roundScore = Score.score;
-        if (roundScore == 14)
+        SceneManager.LoadScene("Stage 2-1");
+        var status = PlayerPrefs.GetString("Status");
+        if(status == STATUS_GAMEOVER)
         {
-            scoreCanvas.SetActive(false);
-            nextCanvas.SetActive(true);
+            InitializeGame();
         }
-        else 
+        else
         {
-            GameOver();
+            Debug.LogError($"The current game status doesn't allow RestartGame(). Current status is {status}");
         }
     }
 
+    /*
+        Successfully finishes the stage before countdown hits 0
+    */
+    public void GameCleared()
+    {
+        Debug.Log("Game Cleared!");
+        Time.timeScale = 0f;
+        gameInterface.SetActive(false);
+        gameClearCanvas.SetActive(true);
+    }
+
+    /*
+        Unsuccessfully finishing the stage either because the countdown hit 0 before getting to top,
+        or picked wrong direction to jump.
+    */
     public void GameOver()
     {
+        Debug.Log("Game Over!");
         PlayerPrefs.SetString("Status", "GameOver");
-        Time.timeScale = 0;
-        gameStartCanvas.SetActive(false);
+        Time.timeScale = 0f;
+        gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);
-        scoreCanvas.SetActive(false);
-        // SceneManager.LoadScene("NimbusScene");
     }
-
-    public void NextStage()
-    {
-        Debug.Log("Move to next stage!");
-        PlayerPrefs.SetString("Status", "NextStage");
-        Time.timeScale = 0;
-        SceneManager.LoadScene(1);
-    }
-
 }

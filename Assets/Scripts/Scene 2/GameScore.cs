@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
     public static int score = 0;
+    public static int stageGoalPoint;
+
+    public static int[] maxScore = {40, 60};
+    public TextMeshProUGUI pointField;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +21,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         string curScore = score.ToString();
-        GetComponent<UnityEngine.UI.Text>().text = $"{curScore} / 14";
+        pointField.text = $"{curScore}";
     }
 }
