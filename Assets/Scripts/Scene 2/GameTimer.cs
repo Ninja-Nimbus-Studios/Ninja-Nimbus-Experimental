@@ -14,7 +14,7 @@ public class CountDownTimer : MonoBehaviour
 
     void Start()
     {
-        countDownTime = 0.5f * 60f;
+        countDownTime = 0.75f * 60f;
     }
 
     void Update()

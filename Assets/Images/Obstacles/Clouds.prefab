@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d2f79fac59c4d638930af2ec42e5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {fileID: 3675830372072430104}
+  point: {fileID: 0}
   cloud: {fileID: 4629432361350505334}
   alternateCloudPrefab: {fileID: 4528470536748978076, guid: d7ec40cbf658b42aea9e655dbad64f83, type: 3}
 --- !u!1 &4629432361350505334

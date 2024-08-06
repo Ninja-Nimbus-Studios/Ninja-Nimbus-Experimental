@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverCanvas;
     public GameObject gameInterface;
     public GameObject gameClearCanvas;
+    public GameObject gameStatistics;
     private int roundScore;
 
     // Status constants
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         gameClearCanvas.SetActive(false);
+        gameStatistics.SetActive(true);
 
         // Reset time scale
         Time.timeScale = 1;
