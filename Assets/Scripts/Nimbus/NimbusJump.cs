@@ -39,9 +39,10 @@ public class NimbusJump : MonoBehaviour
     public const string DIRECTION_L = "left";
     public const string DIRECTION_R = "right";
 
-    // UI changes from jump
+    // Interaction with Clouds
+    private SpriteRenderer cloudIndicator;
+
     // public CloudMechanic cloudMechanic;
-    public NNButtonHandler buttonHandler;
 
     void Start()
     {
@@ -56,10 +57,10 @@ public class NimbusJump : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             // Debug.Log($"{moveSpeed}, {targetPosition}");
             // Check if the position has reached the target
-            if (transform.position == CloudSpawner.cloudCoordinates[jumpCount])
+            if (transform.position == CloudSpawner.clouds[jumpCount].transform.position)
             {
-                // jumpUp = false;
-                // cloudMechanic.ChangeCloud();
+                cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
+                cloudIndicator.color = new Color(0,255,0);
                 PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
                 jumpCount++;
                 bothButtonsPressed = false;

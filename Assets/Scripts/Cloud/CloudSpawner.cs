@@ -21,6 +21,7 @@ public class CloudSpawner : MonoBehaviour
     private float horizontalPos;
     private float prevPos;
 
+    public static List<GameObject> clouds = new List<GameObject>();
     public static List<Vector3> cloudCoordinates = new List<Vector3>();
     public static List<Vector3> midCloudCoordinates = new List<Vector3>();
     public static int MAX_JUMP_COUNT = 0;
@@ -84,6 +85,7 @@ public class CloudSpawner : MonoBehaviour
 
             newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
             cloudCoordinates.Add(newCloud.transform.position);
+            clouds.Add(newCloud);
             prevHeight = newHeight;
             newHeight = prevHeight + CLOUD_DISTANCE;
             prevPos = horizontalPos;
@@ -114,7 +116,7 @@ public class CloudSpawner : MonoBehaviour
             newCloud.transform.position = cloudPosition;
             // midCloudCoordinates.Add(cloudPosition); // midCloudCoordinates list is used for debugging
             cloudCoordinates.Add(cloudPosition);
-
+            clouds.Add(newCloud);
             // Log for debugging purposes
             // Debug.Log(newCloud.transform.position);
             // Debug.Log("******");
