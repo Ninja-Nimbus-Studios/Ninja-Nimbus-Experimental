@@ -1210,6 +1210,7 @@ GameObject:
   - component: {fileID: 833739594}
   - component: {fileID: 833739593}
   - component: {fileID: 833739592}
+  - component: {fileID: 833739596}
   m_Layer: 5
   m_Name: GameClear
   m_TagString: Untagged
@@ -1301,6 +1302,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &833739596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833739591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1857eedb37dee4433a45527d474c0218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftButton: 0
+  nimbusAction: {fileID: 0}
 --- !u!1 &865195051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1610,7 @@ GameObject:
   - component: {fileID: 1155366891}
   - component: {fileID: 1155366890}
   - component: {fileID: 1155366889}
+  - component: {fileID: 1155366892}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -1703,6 +1719,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155366887}
   m_CullTransparentMesh: 1
+--- !u!114 &1155366892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155366887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1857eedb37dee4433a45527d474c0218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftButton: 0
+  nimbusAction: {fileID: 1676301112}
 --- !u!1 &1197565039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1913,7 @@ GameObject:
   - component: {fileID: 1380024758}
   - component: {fileID: 1380024757}
   - component: {fileID: 1380024756}
+  - component: {fileID: 1380024759}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -1991,6 +2022,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380024754}
   m_CullTransparentMesh: 1
+--- !u!114 &1380024759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380024754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1857eedb37dee4433a45527d474c0218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftButton: 1
+  nimbusAction: {fileID: 1676301112}
 --- !u!1 &1402767202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2659,7 @@ MonoBehaviour:
   rightPoint: {fileID: 330082124}
   leftPoint: {fileID: 1863764891}
   gameManager: {fileID: 1271331636}
+  buttonHandler: {fileID: 0}
 --- !u!1 &1863764890
 GameObject:
   m_ObjectHideFlags: 0
