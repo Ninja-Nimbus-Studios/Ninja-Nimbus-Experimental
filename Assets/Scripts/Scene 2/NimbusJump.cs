@@ -41,18 +41,10 @@ public class NimbusJump : MonoBehaviour
 
     // UI changes from jump
     // public CloudMechanic cloudMechanic;
+    public NNButtonHandler buttonHandler;
 
     void Start()
     {
-        if(left != null)
-        {
-            left.onClick.AddListener(() => OnLeftPressed());
-        }
-
-        if(right != null)
-        {
-            right.onClick.AddListener(() => OnRightPressed());
-        }
         scoreBeforeJump = scoreAfterJump = Score.score;
         moveSpeed = 55f;
     }
@@ -95,7 +87,7 @@ public class NimbusJump : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
-    void OnLeftPressed()
+    public void OnLeftPressed()
     {
         Debug.Log("Left Pressed");
         // Check if this jump click was done mid jump
@@ -111,7 +103,7 @@ public class NimbusJump : MonoBehaviour
         }
     }
 
-    void OnRightPressed()
+    public void OnRightPressed()
     {
         Debug.Log("Right Pressed");
         // Check if this jump click was done mid jump
