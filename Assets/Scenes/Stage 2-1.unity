@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxFactor: 1
+  previousCameraPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &455897685
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ea22351e1cd4a439472b852eacf46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownTime: 90
+  countDownTime: 180
   timerText: {fileID: 530129921}
   gameManager: {fileID: 1271331636}
 --- !u!114 &530129921
@@ -1598,6 +1599,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913744417}
   m_CullTransparentMesh: 1
+--- !u!1 &1146603560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146603561}
+  - component: {fileID: 1146603562}
+  m_Layer: 0
+  m_Name: Nimbus hands
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1146603561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146603560}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.17, y: 0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1676301109}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1146603562
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146603560}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 3469cb5c28b404223b5cc26d761d3616, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 9.93, y: 10}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1155366887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2672,7 @@ Transform:
   m_Children:
   - {fileID: 330082124}
   - {fileID: 1863764891}
+  - {fileID: 1146603561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1676301110
@@ -2652,14 +2738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a531dadee88ee488da302de0d65eb84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: {fileID: 1380024756}
-  right: {fileID: 1155366889}
   moveSpeed: 20
   rb: {fileID: 1676301106}
-  rightPoint: {fileID: 330082124}
-  leftPoint: {fileID: 1863764891}
   gameManager: {fileID: 1271331636}
-  buttonHandler: {fileID: 0}
 --- !u!1 &1863764890
 GameObject:
   m_ObjectHideFlags: 0

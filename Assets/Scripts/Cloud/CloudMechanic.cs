@@ -17,7 +17,7 @@ public class CloudMechanic : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        point.gameObject.SetActive(false);
+        point.gameObject.SetActive(false); // disabling this will make the clouds disappear
         cloud.gameObject.SetActive(false);
     }
 

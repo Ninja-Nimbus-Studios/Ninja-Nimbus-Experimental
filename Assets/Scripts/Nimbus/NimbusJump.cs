@@ -6,63 +6,72 @@ using UnityEngine.UI;
 
 public class NimbusJump : MonoBehaviour
 {
-    public Button left;
-    public Button right;
-    public float moveSpeed = 50f;
+    public float moveSpeed;
     public Rigidbody2D rb;
-
-    private float moveX;
-    private float moveY = 3.1f;
     private bool isJumping = false;
     private bool isStuck = true;
 
-    // Different moving modality
+    // Motion and Coordinates
+    public GameManager gameManager;
     private Vector3 prevPosition;
-    public Transform rightPoint;
     private Vector3 rightTarget = new Vector3(6.14f, 3.11f, 0f);
-    public Transform leftPoint;
     private Vector3 leftTarget = new Vector3(-6.14f, 3.11f, 0f);
     private Vector3 upTarget = new Vector3(0f, 3.11f, 0f);
+    private Vector3 latchRightOffset = new Vector3(-1.1f, -0.42f, 0f);
+    private Vector3 latchLeftOffset = new Vector3(1.3f, -0.35f, 0f);
+    private Vector3 offset;
     private Vector3 targetPosition;
-    private float MAX_DISTANCE = 4.39f;
     private bool leftPressed = false;
     private bool rightPressed = false;
     private bool bothButtonsPressed = false;
-    private bool jumpUp = false;
-    
-    // dying mechanic
-    public GameManager gameManager;
-    public static int scoreBeforeJump;
-    public static int scoreAfterJump;
-    public static int jumpCount = 0; // this variable keep scount of how many times it jumped which is the same as cloud index
+    public static int jumpCount; // this variable keep scount of how many times it jumped which is the same as cloud index
     public const string DIRECTION_U = "up";
     public const string DIRECTION_L = "left";
     public const string DIRECTION_R = "right";
 
-    // UI changes from jump
-    // public CloudMechanic cloudMechanic;
-    public NNButtonHandler buttonHandler;
+    // Interaction with Clouds
+    private SpriteRenderer cloudIndicator;
+    private Animator nimbusAnimator;
+    private string prevPos;
+    private bool isMidAirAnimSet;
 
     void Start()
     {
-        scoreBeforeJump = scoreAfterJump = Score.score;
         moveSpeed = 55f;
+        jumpCount = 0;
+
+        if (nimbusAnimator == null)
+        {
+            nimbusAnimator = GetComponent<Animator>();
+        }
+
+        SetPreviousPosition();
     }
 
     void Update()
     {
         if (PlayerPrefs.GetString("Status") == GameManager.STATUS_JUMP)
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            // Debug.Log($"{moveSpeed}, {targetPosition}");
-            // Check if the position has reached the target
-            if (transform.position == CloudSpawner.cloudCoordinates[jumpCount])
+            // Check previous state and play animation
+            if(!isMidAirAnimSet)
             {
-                // jumpUp = false;
-                // cloudMechanic.ChangeCloud();
+                SetMidAirAnimation();
+                targetPosition += offset;
+            }
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Check if the position has reached the target
+            if (transform.position == targetPosition)
+            {
+                LatchAnimation();
+                cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
+                cloudIndicator.color = new Color(0,255,0);
                 PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
+
                 jumpCount++;
                 bothButtonsPressed = false;
+                SetPreviousPosition();
+                isMidAirAnimSet = false;
             }
         }
     }
@@ -133,17 +142,25 @@ public class NimbusJump : MonoBehaviour
         if(rightPressed && leftPressed && IsDirectionCorrect(DIRECTION_U))
         {
             Debug.Log("Jump Up!");
+            PlayerPrefs.SetString("Direction", DIRECTION_U);
+            PlayerPrefs.SetString("AirDirection", DIRECTION_U);
             JumpTowardsTarget();
+
         }
         else if(!rightPressed && IsDirectionCorrect(DIRECTION_L))
         {
             Debug.Log("Jump Left!");
+            PlayerPrefs.SetString("Direction", DIRECTION_L);
+            PlayerPrefs.SetString("AirDirection", DIRECTION_L);
             JumpTowardsTarget();
         }
         else if(!leftPressed && IsDirectionCorrect(DIRECTION_R))
         {
             Debug.Log("Jump Right!");
+            PlayerPrefs.SetString("Direction", DIRECTION_R);
+            PlayerPrefs.SetString("AirDirection", DIRECTION_R);
             JumpTowardsTarget();
+            
         }
         else
         {
@@ -166,46 +183,6 @@ public class NimbusJump : MonoBehaviour
     }
 
     /*
-        Triggers Right Jump
-    */
-    private void JumpRight()
-    {
-        Debug.Log("Right Clicked!");
-        SetCurrentPosition();
-        targetPosition = prevPosition + rightTarget;
-
-        // Set Game Status
-        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
-    }
-
-    /*
-        Triggers Left Jump
-    */
-    private void JumpLeft()
-    {
-        Debug.Log("Left Clicked!");
-        SetCurrentPosition();
-        targetPosition = prevPosition + leftTarget;
-
-        // Set Game Status
-        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
-    }
-
-    /*
-        Triggers Up Jump
-    */
-    private void JumpUp()
-    {
-        Debug.Log("Up Clicked!");
-        SetCurrentPosition();
-        targetPosition = prevPosition + upTarget;
-
-        // Set Game Status
-        PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
-        jumpUp = true;
-    }
-
-    /*
         Triggers jump action towards the correct target
     */
     private void JumpTowardsTarget()
@@ -215,6 +192,95 @@ public class NimbusJump : MonoBehaviour
 
         // Set Game Status
         PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
+    }
+
+    /*
+        Checks which direction nimbus should end on
+    */
+    private void LatchAnimation()
+    {
+        string endDirection = PlayerPrefs.GetString("Direction");
+        if(endDirection == DIRECTION_R)
+        {
+            nimbusAnimator.SetTrigger("Right");
+            // Debug.Log("Sets latch RIGHT");
+        }
+        else
+        {
+            nimbusAnimator.SetTrigger("Left");
+            // Debug.Log("Sets latch LEFT");
+        }
+    }
+
+    /*
+        Sets animation during mid air action. If Nimbus jumps right from left, or up from right,
+        then the animation trigger should be AirRight and if it jumps left from right or up from left, 
+        then the animation trigger should be AirLeft. This function also adjusts the offset you need for
+        Nimbus to visually latch onto cloud.
+    */
+    private void SetMidAirAnimation()
+    {
+        isMidAirAnimSet = true;
+        string airDirection = PlayerPrefs.GetString("AirDirection");
+        if(prevPos == DIRECTION_R)
+        {
+            if(airDirection == DIRECTION_L)
+            {
+                nimbusAnimator.SetTrigger("AirLeft");
+                offset = latchLeftOffset;
+                Debug.Log("Sets Air LEFT -> 1.");
+            }
+            else if(airDirection == DIRECTION_R)
+            {
+                nimbusAnimator.SetTrigger("AirRight");
+                offset = latchRightOffset;
+                Debug.Log("Sets Air RIGHT -> 2.");
+            }
+            else
+            {
+                nimbusAnimator.SetTrigger("AirRight");
+                offset = latchRightOffset;
+                Debug.Log("Sets Air RIGHT -> 3.");
+            }
+        }
+        else
+        {
+            if(airDirection == DIRECTION_R)
+            {
+                nimbusAnimator.SetTrigger("AirRight");
+                offset = latchRightOffset;
+                Debug.Log("Sets Air RIGHT -> 4.");
+            }
+            else if(airDirection == DIRECTION_L)
+            {
+                nimbusAnimator.SetTrigger("AirLeft");
+                offset = latchLeftOffset;
+                Debug.Log("Sets Air LEFT -> 5.");
+            }
+            else 
+            {
+                nimbusAnimator.SetTrigger("AirLeft");
+                offset = latchLeftOffset;
+                Debug.Log("Sets Air LEFT -> 6.");
+            }
+        }
+    }
+
+    /*
+        Sets prevPos variable to the previous position. It can be either right or left
+    */
+    private void SetPreviousPosition()
+    {
+        if (transform.position.x > CloudSpawner.clouds[jumpCount].transform.position.x)
+        {
+            prevPos = DIRECTION_R;
+            Debug.Log("Previous Position: RIGHT");
+        }
+        else if (transform.position.x < CloudSpawner.clouds[jumpCount].transform.position.x)
+        {
+            prevPos = DIRECTION_L;
+            Debug.Log("Previous Position: LEFT");
+        }
     }
 
     /*
