@@ -46,6 +46,7 @@ public class CloudSpawner : MonoBehaviour
     void InitializeCloudSpawner()
     {
         // Clear previous coordinates from list
+        clouds.Clear();
         cloudCoordinates.Clear();
         midCloudCoordinates.Clear();
 
@@ -58,11 +59,12 @@ public class CloudSpawner : MonoBehaviour
         MiddleSpawnCloud(midSpawnCount);
 
         // Log for debugging purposes
-        // Debug.Log("*****");
-        // for(int i = 0; i < midCloudCoordinates.Count; i++)
-        // {
-        //     Console.WriteLine(midCloudCoordinates[i]);
-        // }
+        Debug.Log("*****");
+        Debug.Log($"{cloudCoordinates.Count}");
+        for(int i = 0; i < cloudCoordinates.Count; i++)
+        {
+            Console.WriteLine(cloudCoordinates[i]);
+        }
 
         MAX_JUMP_COUNT = cloudCoordinates.Count;
     }

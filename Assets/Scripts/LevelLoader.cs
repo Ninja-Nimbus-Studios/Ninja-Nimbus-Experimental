@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour
     public const float TRANSITION_TIME = 2f;
     void Update()
     {
-        if(Score.score == Score.maxScore[SceneManager.GetActiveScene().buildIndex])
+        if(Score.score == Score.maxScore[SceneManager.GetActiveScene().buildIndex - 1])
         {
             LoadNextLevel();
         }
@@ -17,13 +17,15 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        // Give time to play Nimbus animation
+
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     IEnumerator LoadLevel(int levelIndex)
     {
         // Play Animation
-        transition.SetTrigger("Start");
+        transition.SetTrigger("Goal");
 
         yield return new WaitForSeconds(TRANSITION_TIME);
 
