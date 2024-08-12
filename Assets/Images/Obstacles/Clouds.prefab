@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3239612466405540404}
   - component: {fileID: 1499455819829924676}
-  - component: {fileID: 1729517449149881178}
+  - component: {fileID: 9173555630904008291}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -249,7 +249,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1729517449149881178
+--- !u!114 &9173555630904008291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,9 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d2f79fac59c4d638930af2ec42e5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {fileID: 0}
-  cloud: {fileID: 4629432361350505334}
-  alternateCloudPrefab: {fileID: 4528470536748978076, guid: d7ec40cbf658b42aea9e655dbad64f83, type: 3}
+  point: {fileID: 3675830372072430104}
 --- !u!1 &4629432361350505334
 GameObject:
   m_ObjectHideFlags: 0

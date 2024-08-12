@@ -37,10 +37,10 @@ public class GroundManager : MonoBehaviour
         }
 
         // Ensure buttonText is assigned
-        if (buttonText == null)
-        {
-            buttonText = startButton.GetComponentInChildren<Text>();
-        }
+        // if (buttonText == null)
+        // {
+        //     buttonText = startButton.GetComponentInChildren<Text>();
+        // }
     }
 
     public void MoveGround()

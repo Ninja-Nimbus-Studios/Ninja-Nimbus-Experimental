@@ -17,13 +17,15 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        // Give time to play Nimbus animation
+
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     IEnumerator LoadLevel(int levelIndex)
     {
         // Play Animation
-        transition.SetTrigger("Start");
+        transition.SetTrigger("Goal");
 
         yield return new WaitForSeconds(TRANSITION_TIME);
 

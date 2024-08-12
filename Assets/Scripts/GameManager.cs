@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Debug.Log("Restart Game");
-        SceneManager.LoadScene("Stage 2-1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         var status = PlayerPrefs.GetString("Status");
         if(status == STATUS_GAMEOVER)
         {
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     public void GameCleared()
     {
         Debug.Log("Game Cleared!");
+
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameClearCanvas.SetActive(true);
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over!");
         PlayerPrefs.SetString("Status", "GameOver");
+        Debug.Log($"In GameOver(): {PlayerPrefs.GetString("Status")}");
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);

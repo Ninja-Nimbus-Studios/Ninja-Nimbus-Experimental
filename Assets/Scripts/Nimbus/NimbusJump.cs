@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -52,26 +53,34 @@ public class NimbusJump : MonoBehaviour
     {
         if (PlayerPrefs.GetString("Status") == GameManager.STATUS_JUMP)
         {
-            // Check previous state and play animation
-            if(!isMidAirAnimSet)
+            try
             {
-                SetMidAirAnimation();
-                targetPosition += offset;
+                // Check previous state and play animation
+                if(!isMidAirAnimSet)
+                {
+                    SetMidAirAnimation();
+                    targetPosition += offset;
+                }
+                transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+                // Check if the position has reached the target
+                if (transform.position == targetPosition)
+                {
+                    LatchAnimation();
+                    Debug.Log($"{CloudSpawner.clouds[jumpCount]}");
+                    cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
+                    cloudIndicator.color = new Color(0,255,0);
+                    PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
+
+                    jumpCount++;
+                    bothButtonsPressed = false;
+                    SetPreviousPosition();
+                    isMidAirAnimSet = false;
+                }
             }
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            // Check if the position has reached the target
-            if (transform.position == targetPosition)
+            catch (NullReferenceException ex)
             {
-                LatchAnimation();
-                cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
-                cloudIndicator.color = new Color(0,255,0);
-                PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
-
-                jumpCount++;
-                bothButtonsPressed = false;
-                SetPreviousPosition();
-                isMidAirAnimSet = false;
+                Debug.LogException(ex, this);
             }
         }
     }
@@ -296,7 +305,7 @@ public class NimbusJump : MonoBehaviour
             if(direction == DIRECTION_U)
             {
                 Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
-                return nextCoordinate.x == transform.position.x;
+                return Mathf.Abs(nextCoordinate.x - transform.position.x) < 1.31;
             }
             else if(direction == DIRECTION_L)
             {
