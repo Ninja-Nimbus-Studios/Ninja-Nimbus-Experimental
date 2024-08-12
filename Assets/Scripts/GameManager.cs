@@ -90,7 +90,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over!");
         PlayerPrefs.SetString("Status", "GameOver");
-        Debug.Log($"In GameOver(): {PlayerPrefs.GetString("Status")}");
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);

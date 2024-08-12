@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLeftButton: 1
-  nimbusAction: {fileID: 0}
+  nimbusAction: {fileID: 5600418999227131779, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
 --- !u!1 &6705991401150710727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,4 +1230,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLeftButton: 0
-  nimbusAction: {fileID: 0}
+  nimbusAction: {fileID: 5600418999227131779, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}

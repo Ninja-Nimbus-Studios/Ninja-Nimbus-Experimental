@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour
     public const float TRANSITION_TIME = 2f;
     void Update()
     {
-        if(Score.score == Score.maxScore[SceneManager.GetActiveScene().buildIndex])
+        if(Score.score == Score.maxScore[SceneManager.GetActiveScene().buildIndex - 1])
         {
             LoadNextLevel();
         }
