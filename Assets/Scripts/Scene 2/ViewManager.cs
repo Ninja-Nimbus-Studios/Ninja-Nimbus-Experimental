@@ -5,14 +5,13 @@ public class ViewManager : MonoBehaviour
     public Transform target;
     public Transform background;
     private Vector3 backgroundOffset;
-    public float parallaxFactor = 0.01f; // Factor to control the speed of the parallax effect
+    public float parallaxFactor; // Factor to control the speed of the parallax effect
 
 
     void Start()
     {
         backgroundOffset = background.position - transform.position;
         Debug.Log($"BackgroundOffset: {backgroundOffset.ToString()}");
-        parallaxFactor = 0.015f; // Factor to control the speed of the parallax effect
     }
 
     private void LateUpdate()
