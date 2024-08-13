@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Score : MonoBehaviour
 {
@@ -22,5 +23,12 @@ public class Score : MonoBehaviour
     {
         string curScore = score.ToString();
         pointField.text = $"{curScore}";
+    }
+
+    public void CalculateFinalScore()
+    {
+        int time = (int)CountDownTimer.currentTime;
+        int finalScore = score + time - Mistake.mistake;
+        pointField.text = $"{finalScore.ToString()}";
     }
 }

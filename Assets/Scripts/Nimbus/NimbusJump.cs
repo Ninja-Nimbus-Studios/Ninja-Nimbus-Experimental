@@ -117,7 +117,7 @@ public class NimbusJump : MonoBehaviour
         else
         {
             Debug.Log("You lost: Double Jump not allowed!");
-            gameManager.GameOver();
+            Mistake.mistake++;
         }
     }
 
@@ -133,7 +133,7 @@ public class NimbusJump : MonoBehaviour
         else
         {
             Debug.Log("You lost: Double Jump not allowed!");
-            gameManager.GameOver();
+            Mistake.mistake++;
         }
     }
 
@@ -144,10 +144,12 @@ public class NimbusJump : MonoBehaviour
     private void BothButtonPress()
     {
         if (bothButtonsPressed){
+            Debug.Log("Both Button Pressed already!");
             return; // Prevent multiple invocations
         }
         bothButtonsPressed = true;
 
+        Debug.Log("Both Button Pressed!");
         if(rightPressed && leftPressed && IsDirectionCorrect(DIRECTION_U))
         {
             Debug.Log("Jump Up!");
@@ -182,13 +184,14 @@ public class NimbusJump : MonoBehaviour
             else
             {
                 Debug.Log("You lost: wrong direction to jump!");
-                gameManager.GameOver();
+                Mistake.mistake++;
             }
         }
 
         // Reset button states after checking
         leftPressed = false;
         rightPressed = false;
+        bothButtonsPressed = false;
     }
 
     /*

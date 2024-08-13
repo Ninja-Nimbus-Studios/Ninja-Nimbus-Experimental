@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameInterface;
     public GameObject gameClearCanvas;
     public GameObject gameStatistics;
-    private int roundScore;
+
+    private Score scoreComponent;
 
     // Status constants
     public const String STATUS_JUMP = "Jumping";
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
 
         // Assign the buttons to their respective functions
         playAgainButton.onClick.AddListener(() => RestartGame());
+
+        scoreComponent = GameObject.Find("Point Field").GetComponent<Score>();
     }
 
     /*
@@ -80,6 +83,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameClearCanvas.SetActive(true);
+        if (scoreComponent != null)
+        {
+            scoreComponent.CalculateFinalScore();
+        }
+        else
+        {
+            Debug.LogError("Couldn't find the Score class instance!");
+        }
     }
 
     /*

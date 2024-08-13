@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CountDownTimer : MonoBehaviour 
 {
     public float countDownTime = 1 * 60f;
-    private float currentTime;
+    public static float currentTime;
     private bool isTiming = false;
 
     public TextMeshProUGUI timerText;
