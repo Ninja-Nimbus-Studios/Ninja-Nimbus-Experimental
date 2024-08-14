@@ -323,7 +323,14 @@ public class NimbusJump : MonoBehaviour
         }
         else {
             Debug.Log("jumpCount at max!");
-            PlayerPrefs.SetString("Status", GameManager.STATUS_GAMECLEAR);
+            if(IsGameStageClearSuccessful())
+            {
+                PlayerPrefs.SetString("Status", GameManager.STATUS_GAMECLEAR);
+            }
+            else
+            {
+                PlayerPrefs.SetString("Status", GameManager.STATUS_GAMEOVER);
+            }
             return false;
         }
     }
@@ -343,6 +350,19 @@ public class NimbusJump : MonoBehaviour
             return false;
         }
     }
+
+    private bool IsGameStageClearSuccessful()
+    {
+        if (Score.finalScore < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     private void SetCurrentPosition()
     {
         prevPosition = transform.position;

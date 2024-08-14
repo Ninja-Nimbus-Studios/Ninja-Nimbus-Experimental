@@ -8,10 +8,10 @@ using System;
 public class Score : MonoBehaviour
 {
     public static int score = 0;
-    public static int stageGoalPoint;
-
-    public static int[] maxScore = {40, 60};
+    public static int[] maxScore = {40, 40, 40};
     public TextMeshProUGUI pointField;
+    private string curScore;
+    public static int finalScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +21,8 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string curScore = score.ToString();
+        curScore = score.ToString();
         pointField.text = $"{curScore}";
-    }
-
-    public void CalculateFinalScore()
-    {
-        int time = (int)CountDownTimer.currentTime;
-        int finalScore = score + time - Mistake.mistake;
-        pointField.text = $"{finalScore.ToString()}";
+        finalScore = (int)CountDownTimer.currentTime - Mistake.mistake;
     }
 }

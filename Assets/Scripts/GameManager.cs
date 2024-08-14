@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     public GameObject gameClearCanvas;
     public GameObject gameStatistics;
 
-    private Score scoreComponent;
-
     // Status constants
     public const String STATUS_JUMP = "Jumping";
     public const String STATUS_REST = "Resting";
@@ -29,7 +27,6 @@ public class GameManager : MonoBehaviour
         // Assign the buttons to their respective functions
         playAgainButton.onClick.AddListener(() => RestartGame());
 
-        scoreComponent = GameObject.Find("Point Field").GetComponent<Score>();
     }
 
     /*
@@ -83,14 +80,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameClearCanvas.SetActive(true);
-        if (scoreComponent != null)
-        {
-            scoreComponent.CalculateFinalScore();
-        }
-        else
-        {
-            Debug.LogError("Couldn't find the Score class instance!");
-        }
+        // Score.CalculateFinalScore();
+        UnlockNewLevel();
     }
 
     /*
@@ -104,5 +95,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);
+    }
+
+    private void UnlockNewLevel()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+        }
     }
 }

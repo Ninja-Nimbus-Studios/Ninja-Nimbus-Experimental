@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playAgainButton: {fileID: 0}
-  gameStartCanvas: {fileID: 0}
-  gameOverCanvas: {fileID: 0}
-  gameInterface: {fileID: 0}
-  gameClearCanvas: {fileID: 0}
+  gameStartCanvas: {fileID: 8308727488507064236, guid: 79a07db23b6eb4548a9100320dba99a3, type: 3}
+  gameOverCanvas: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+  gameInterface: {fileID: 5595073918728164145, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
+  gameClearCanvas: {fileID: 8126648592563614108, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
   gameStatistics: {fileID: 0}
+  gameScore: {fileID: 0}
 --- !u!114 &4227580693482459284
 MonoBehaviour:
   m_ObjectHideFlags: 0

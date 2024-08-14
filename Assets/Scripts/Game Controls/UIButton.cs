@@ -16,4 +16,14 @@ public class UIButton : MonoBehaviour
     {
         SceneManager.LoadScene("Level Selector");
     }
+
+    public void MoveToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PlayCurrentLevelAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
