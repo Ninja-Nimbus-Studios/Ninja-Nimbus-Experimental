@@ -18,13 +18,20 @@ public class DeathReason : MonoBehaviour
         {
             Debug.Log($"GameOverReason.cs:\nCountDownTimer.currentTime={CountDownTimer.currentTime}\nScore.score={Score.score}\nScore.finalScore={Score.finalScore}");
             
-            if(CountDownTimer.currentTime == 0 && Score.score < Score.maxScore[SceneManager.GetActiveScene().buildIndex - 1])
+            // When time is 0
+            if(CountDownTimer.currentTime == 0)
             {
                 TimeUpMessage();
             }
-            else if(CountDownTimer.currentTime == 0 && Score.score == Score.maxScore[SceneManager.GetActiveScene().buildIndex - 1] && Score.finalScore < 5)
+            // Otherwise, time is not 
+            else if(Score.finalScore < 5)
             {
                 NegativeScoreMessage();
+            }
+            else
+            {
+                GenericGameOverMessage();
+                Debug.LogError("Game Over: Game Over detection was not handled properly..");
             }
         }
     }
@@ -37,7 +44,14 @@ public class DeathReason : MonoBehaviour
 
     private void NegativeScoreMessage()
     {
-        deathReasonField.text = $"Your final score was: {Score.finalScore}.\nYou made too many mistakes or didn't go fast enough!";
+        deathReasonField.text = $"Final Score: {Score.finalScore}\nYou made too many mistakes or didn't go fast enough!";
         hasSetGameOverMessage = true;
     }
+
+    private void GenericGameOverMessage()
+    {
+        deathReasonField.text = $"GAME OVER!\nCountDownTimer.currentTime={CountDownTimer.currentTime}\nScore.score={Score.score}\nScore.finalScore={Score.finalScore}";
+        hasSetGameOverMessage = true;
+    }
+
 }

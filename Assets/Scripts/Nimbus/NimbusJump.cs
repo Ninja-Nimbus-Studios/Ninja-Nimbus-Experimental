@@ -34,6 +34,7 @@ public class NimbusJump : MonoBehaviour
     private SpriteRenderer cloudIndicator;
     private Animator nimbusAnimator;
     private string prevPos;
+    private string nextPos;
     private bool isMidAirAnimSet;
 
     void Start()
@@ -71,11 +72,27 @@ public class NimbusJump : MonoBehaviour
                     cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
                     cloudIndicator.color = new Color(0,255,0);
                     PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
-
                     jumpCount++;
+
                     bothButtonsPressed = false;
-                    SetPreviousPosition();
                     isMidAirAnimSet = false;
+                    SetPreviousPosition();
+
+                    // If Nimbus is at the end, check game clear or over
+                    Debug.Log($"NimbusJump Update: {jumpCount}/{CloudSpawner.MAX_JUMP_COUNT}");
+                    if(jumpCount == CloudSpawner.MAX_JUMP_COUNT)
+                    {
+                        if(IsGameStageClearSuccessful()) // check if game clear successful or not
+                        {
+                            PlayerPrefs.SetString("Status", GameManager.STATUS_GAMECLEAR);
+                            Debug.Log("You won!");
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetString("Status", GameManager.STATUS_GAMEOVER);
+                            Debug.Log("You Lost!");
+                        }
+                    }
                 }
             }
             catch (NullReferenceException ex)
@@ -173,18 +190,13 @@ public class NimbusJump : MonoBehaviour
             JumpTowardsTarget();
             
         }
-        else
+        else // If Jump count is max, or if direction is wrong then it goes through here
         {
-            if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMECLEAR)
+            if(CloudSpawner.MAX_JUMP_COUNT >= jumpCount) // if jump count is less than max, then player not at end yet
             {
-                Debug.Log("You won!");
-                gameManager.GameCleared();
-
-            }
-            else
-            {
-                Debug.Log("You lost: wrong direction to jump!");
+                Debug.Log("Point deducted: Wrong direction to jump!");
                 Mistake.mistake++;
+                // Make a time delay for penalty and add more time in the beginning
             }
         }
 
@@ -279,10 +291,16 @@ public class NimbusJump : MonoBehaviour
     }
 
     /*
-        Sets prevPos variable to the previous position. It can be either right or left
+        Sets prevPos variable to the previous position. It can be either right or left.
+        This is used to set mid air animation.
     */
     private void SetPreviousPosition()
     {
+        if (jumpCount == CloudSpawner.MAX_JUMP_COUNT)
+        {
+            return;
+        }
+
         if (transform.position.x > CloudSpawner.clouds[jumpCount].transform.position.x)
         {
             prevPos = DIRECTION_R;
@@ -302,7 +320,7 @@ public class NimbusJump : MonoBehaviour
     */
     private bool IsDirectionCorrect(string direction)
     {
-        if(CloudSpawner.MAX_JUMP_COUNT > jumpCount)
+        if(CloudSpawner.MAX_JUMP_COUNT >= jumpCount)
         {
             var nextCoordinate = CloudSpawner.cloudCoordinates[jumpCount];
             if(direction == DIRECTION_U)
@@ -323,14 +341,6 @@ public class NimbusJump : MonoBehaviour
         }
         else {
             Debug.Log("jumpCount at max!");
-            if(IsGameStageClearSuccessful())
-            {
-                PlayerPrefs.SetString("Status", GameManager.STATUS_GAMECLEAR);
-            }
-            else
-            {
-                PlayerPrefs.SetString("Status", GameManager.STATUS_GAMEOVER);
-            }
             return false;
         }
     }
@@ -353,7 +363,7 @@ public class NimbusJump : MonoBehaviour
 
     private bool IsGameStageClearSuccessful()
     {
-        if (Score.finalScore < 0)
+        if(Score.finalScore < 5)
         {
             return false;
         }
@@ -361,10 +371,5 @@ public class NimbusJump : MonoBehaviour
         {
             return true;
         }
-    }
-
-    private void SetCurrentPosition()
-    {
-        prevPosition = transform.position;
     }
 }
