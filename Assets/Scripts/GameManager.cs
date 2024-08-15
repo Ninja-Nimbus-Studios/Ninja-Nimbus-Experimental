@@ -5,15 +5,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button playAgainButton;
-    // public Button homeButton;
-    // public Button nextButton;
-    public GameObject gameStartCanvas;
     public GameObject gameOverCanvas;
     public GameObject gameInterface;
     public GameObject gameClearCanvas;
     public GameObject gameStatistics;
-    private int roundScore;
 
     // Status constants
     public const String STATUS_JUMP = "Jumping";
@@ -24,9 +19,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeGame();
-
-        // Assign the buttons to their respective functions
-        playAgainButton.onClick.AddListener(() => RestartGame());
     }
 
     /*
@@ -36,7 +28,6 @@ public class GameManager : MonoBehaviour
     {
         // Set Canvas
         gameInterface.SetActive(true);
-        gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         gameClearCanvas.SetActive(false);
         gameStatistics.SetActive(true);
@@ -80,6 +71,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameClearCanvas.SetActive(true);
+        // Score.CalculateFinalScore();
+        UnlockNewLevel();
     }
 
     /*
@@ -93,5 +86,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);
+    }
+
+    private void UnlockNewLevel()
+    {
+        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+        }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CountDownTimer : MonoBehaviour 
 {
     public float countDownTime = 1 * 60f;
-    private float currentTime;
+    public static float currentTime;
     private bool isTiming = false;
 
     public TextMeshProUGUI timerText;
@@ -14,7 +14,7 @@ public class CountDownTimer : MonoBehaviour
 
     void Start()
     {
-        countDownTime = 0.75f * 60f;
+        countDownTime = 0.55f * 60f;
     }
 
     void Update()
@@ -29,6 +29,12 @@ public class CountDownTimer : MonoBehaviour
         {
             StopCountDown();
             gameManager.GameCleared();
+        }
+        // Countdown should stop if GameOver was called
+        else if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMEOVER && isTiming)
+        {
+            StopCountDown();
+            gameManager.GameOver();
         }
 
         // While game is timing, update display with current time

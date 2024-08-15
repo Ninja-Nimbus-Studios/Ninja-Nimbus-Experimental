@@ -12,8 +12,20 @@ public class UIButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void BackToLevelSelector()
+    public void ToLevelSelector()
     {
         SceneManager.LoadScene("Level Selector");
     }
+
+    public void MoveToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PlayCurrentLevelAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
 }

@@ -24,7 +24,7 @@ public class CloudSpawner : MonoBehaviour
     public static List<GameObject> clouds = new List<GameObject>();
     public static List<Vector3> cloudCoordinates = new List<Vector3>();
     public static List<Vector3> midCloudCoordinates = new List<Vector3>();
-    public static int MAX_JUMP_COUNT = 0;
+    public static int MAX_JUMP_COUNT;
 
     // Constant Vairables 
     const float RIGHT_COLUMN = 3.1f;
