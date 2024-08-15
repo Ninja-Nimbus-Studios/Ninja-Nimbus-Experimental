@@ -939,7 +939,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3820363852630171073}
         m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
-        m_MethodName: BackToLevelSelector
+        m_MethodName: ToLevelSelector
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button playAgainButton;
-    // public Button homeButton;
-    // public Button nextButton;
-    public GameObject gameStartCanvas;
     public GameObject gameOverCanvas;
     public GameObject gameInterface;
     public GameObject gameClearCanvas;
@@ -23,10 +19,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeGame();
-
-        // Assign the buttons to their respective functions
-        playAgainButton.onClick.AddListener(() => RestartGame());
-
     }
 
     /*
@@ -36,7 +28,6 @@ public class GameManager : MonoBehaviour
     {
         // Set Canvas
         gameInterface.SetActive(true);
-        gameStartCanvas.SetActive(false);
         gameOverCanvas.SetActive(false);
         gameClearCanvas.SetActive(false);
         gameStatistics.SetActive(true);

@@ -21,7 +21,7 @@ public class NimbusJump : MonoBehaviour
     private Vector3 latchRightOffset = new Vector3(-1.1f, -0.42f, 0f);
     private Vector3 latchLeftOffset = new Vector3(1.3f, -0.35f, 0f);
     private Vector3 offset;
-    private Vector3 targetPosition;
+    private static Vector3 targetPosition;
     private bool leftPressed = false;
     private bool rightPressed = false;
     private bool bothButtonsPressed = false;
@@ -36,6 +36,9 @@ public class NimbusJump : MonoBehaviour
     private string prevPos;
     private string nextPos;
     private bool isMidAirAnimSet;
+
+    // Constants
+    private const int PASSING_FINAL_SCORE = 5;
 
     void Start()
     {
@@ -60,6 +63,7 @@ public class NimbusJump : MonoBehaviour
                 if(!isMidAirAnimSet)
                 {
                     SetMidAirAnimation();
+                    Debug.Log($"Update:\noffset:{offset}, targetPosition:{targetPosition}");
                     targetPosition += offset;
                 }
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
@@ -165,8 +169,6 @@ public class NimbusJump : MonoBehaviour
             return; // Prevent multiple invocations
         }
         bothButtonsPressed = true;
-
-        Debug.Log("Both Button Pressed!");
         if(rightPressed && leftPressed && IsDirectionCorrect(DIRECTION_U))
         {
             Debug.Log("Jump Up!");
@@ -211,8 +213,8 @@ public class NimbusJump : MonoBehaviour
     */
     private void JumpTowardsTarget()
     {
-        // Debug.Log("Nimbus is jumping towards correct direction!");
         targetPosition = CloudSpawner.cloudCoordinates[jumpCount];
+        Debug.Log($"JumpTowardsTarget:{targetPosition}");
 
         // Set Game Status
         PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
@@ -325,17 +327,17 @@ public class NimbusJump : MonoBehaviour
             var nextCoordinate = CloudSpawner.cloudCoordinates[jumpCount];
             if(direction == DIRECTION_U)
             {
-                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}, {Mathf.Abs(nextCoordinate.x - transform.position.x) < 1.31}");
                 return Mathf.Abs(nextCoordinate.x - transform.position.x) < 1.31;
             }
             else if(direction == DIRECTION_L)
             {
-                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}, {nextCoordinate.x < transform.position.x}");
                 return nextCoordinate.x < transform.position.x;
             }
             else
             {
-                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}");
+                Debug.Log($"Cloud:{nextCoordinate.x}, {transform.position.x}, {nextCoordinate.x > transform.position.x}");
                 return nextCoordinate.x > transform.position.x;
             }
         }
@@ -363,7 +365,7 @@ public class NimbusJump : MonoBehaviour
 
     private bool IsGameStageClearSuccessful()
     {
-        if(Score.finalScore < 5)
+        if(Score.finalScore < PASSING_FINAL_SCORE)
         {
             return false;
         }

@@ -9,12 +9,14 @@ public class ClearScore : MonoBehaviour
 {
     public TextMeshProUGUI finalScoreField;
     private int finalScore;
+    private bool hasSetClearMessage = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMECLEAR)
+        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_GAMECLEAR && !hasSetClearMessage)
         {
+            Debug.Log("GameClearScore.cs -> Update: Calculating final score...");
             CalculateFinalScore();
         }
     }
@@ -23,5 +25,6 @@ public class ClearScore : MonoBehaviour
     {
         finalScore = (int)CountDownTimer.currentTime - Mistake.mistake;
         finalScoreField.text = $"Time:{(int)CountDownTimer.currentTime}; Mistakes:{Mistake.mistake}\nFinal Score:{finalScore.ToString()}";
+        hasSetClearMessage = true;
     }
 }

@@ -10,6 +10,7 @@ public class DeathReason : MonoBehaviour
 {
     public TextMeshProUGUI deathReasonField;
     private bool hasSetGameOverMessage = false;
+    private const int PASSING_FINAL_SCORE = 5;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +25,7 @@ public class DeathReason : MonoBehaviour
                 TimeUpMessage();
             }
             // Otherwise, time is not 
-            else if(Score.finalScore < 5)
+            else if(Score.finalScore < PASSING_FINAL_SCORE)
             {
                 NegativeScoreMessage();
             }
