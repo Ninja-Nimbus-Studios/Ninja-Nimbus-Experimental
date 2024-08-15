@@ -20,7 +20,7 @@ public class CountDownTimer : MonoBehaviour
     void Update()
     {
         // Countdown should start in the beginning when timing hasn't started yet
-        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_REST && !isTiming)
+        if(PlayerPrefs.GetString("Status") == GameManager.STATUS_REST && !isTiming && !GameManager.isTutorial)
         {
             StartCountDown(); // Start the countdown
         }
@@ -54,14 +54,14 @@ public class CountDownTimer : MonoBehaviour
         }
     }
 
-    private void StartCountDown()
+    public void StartCountDown()
     {
         currentTime = countDownTime; // Reset elapsed time
         isTiming = true;
         Debug.Log("Timer started");
     }
 
-    private void StopCountDown()
+    public void StopCountDown()
     {
         isTiming = false;
         Debug.Log("Timing stopped");

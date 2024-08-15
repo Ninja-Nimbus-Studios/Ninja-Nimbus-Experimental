@@ -1589,7 +1589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2a129f1845f4ae8a61a8ccd625ff88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midSpawnCount: 37
+  easySpawnCount: 3
+  midSpawnCount: 57
   cloud: {fileID: 4629432361350505334, guid: 5ea6230e64cc044b4bfb206622b90b49, type: 3}
   nimbus: {fileID: 1676301104}
 --- !u!1 &1438316599

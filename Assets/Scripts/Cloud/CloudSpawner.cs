@@ -8,8 +8,8 @@ using UnityEngine;
 
 public class CloudSpawner : MonoBehaviour
 {
-    const int EASY_SPAWNCOUNT = 3; // number of spawns
-    [SerializeField] public int midSpawnCount = 37; // number of spawns
+    [SerializeField] public int easySpawnCount; // number of spawns
+    [SerializeField] public int midSpawnCount; // number of spawns
     private float timer = 0;
     public GameObject cloud; //reference to pipe
     private float prevHeight;
@@ -55,7 +55,7 @@ public class CloudSpawner : MonoBehaviour
         prevPos = 1f;
 
         // Spawn Clouds for different levels
-        EasySpawnCloud(EASY_SPAWNCOUNT);
+        EasySpawnCloud(easySpawnCount);
         MiddleSpawnCloud(midSpawnCount);
 
         // Log for debugging purposes
