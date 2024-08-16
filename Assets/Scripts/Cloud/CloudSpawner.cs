@@ -128,5 +128,60 @@ public class CloudSpawner : MonoBehaviour
             newHeight = prevHeight + CLOUD_DISTANCE;
         }
     }
+
+    void TutorialSpawnCloud(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCloudAcross();
+            SpawnCloudAcross();
+            SpawnCloudAcross();
+            SpawnCloudAbove();
+        }
+    }
+
+    void SpawnCloudAbove()
+    {
+        GameObject newCloud = Instantiate(cloud); // create new pipe
+
+        // Determine x coordinate for newly spawned cloud
+        if(prevPos == RIGHT_COLUMN)
+        {
+            horizontalPos = RIGHT_COLUMN;
+        }
+        else
+        {
+            horizontalPos = LEFT_COLUMN;
+        }
+
+        newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
+        cloudCoordinates.Add(newCloud.transform.position);
+        clouds.Add(newCloud);
+        prevHeight = newHeight;
+        newHeight = prevHeight + CLOUD_DISTANCE;
+        prevPos = horizontalPos;
+    }
+
+    void SpawnCloudAcross()
+    {
+        GameObject newCloud = Instantiate(cloud); // create new pipe
+
+        // Determine x coordinate for newly spawned cloud
+        if(prevPos == LEFT_COLUMN)
+        {
+            horizontalPos = RIGHT_COLUMN;
+        }
+        else
+        {
+            horizontalPos = LEFT_COLUMN;
+        }
+
+        newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
+        cloudCoordinates.Add(newCloud.transform.position);
+        clouds.Add(newCloud);
+        prevHeight = newHeight;
+        newHeight = prevHeight + CLOUD_DISTANCE;
+        prevPos = horizontalPos;
+    }
 }
  

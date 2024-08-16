@@ -5,16 +5,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Unity.Collections;
 using Unity.VisualScripting;
+using TMPro;
 
 public class Tutorial : MonoBehaviour
 {
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
+    [SerializeField] private TextMeshProUGUI tutorialText;
+    [SerializeField] private Canvas tutorialCanvas; 
     public CountDownTimer timer;
     private bool isTutorialPicked = false;
     private bool rightButtonClicked = false;
     private bool leftButtonClicked = false;
 
+    void Start()
+    {
+        tutorialCanvas.gameObject.SetActive(true);
+    }
 
     public void ChooseTutorial(string level)
     {
@@ -50,24 +57,42 @@ public class Tutorial : MonoBehaviour
         StartRightClickTutorial();
     }
 
+    /*
+     * Coroutine starters for any of the tutorial
+     */
     public void StartRightClickTutorial()
     {
         StartCoroutine(RightClickTutorial());
     }
+    public void StartLeftClickTutorial()
+    {
+        StartCoroutine(LeftClickTutorial());
+    }
+    public void StartRuleAndMistake()
+    {
+        StartCoroutine(ExplainRuleAndMistake());
+    }
 
+    // Tutorial for right click
     public IEnumerator RightClickTutorial()
     {
+        timer.StopCountDown();
+
+        tutorialText.text = "Welcome to the Adventure of Ninja Nimbus!";
+        yield return new WaitForSeconds(3);
+        tutorialText.text = "You will learn about basic controls and rules.";
+        yield return new WaitForSeconds(3);
+        tutorialText.text = "Nimbus wants to jump right and catch cloud!";
+        yield return new WaitForSeconds(2);
+
+        // Wait until Right click
         if(!rightButton.IsInteractable())
         {
             ToggleRightButton();
         }
-
-        // Wait until click
         rightButtonClicked = false;
-        timer.StopCountDown();
+        tutorialText.text = "Click the orange button on the right to jump right.";
         rightButton.onClick.AddListener(OnRightButtonClick);
-
-        Debug.Log("Start Waiting for user right click");
         yield return new WaitUntil(() => rightButtonClicked);
 
         rightButton.onClick.RemoveListener(OnRightButtonClick);
@@ -81,23 +106,23 @@ public class Tutorial : MonoBehaviour
         StartLeftClickTutorial();
     }
 
-    public void StartLeftClickTutorial()
-    {
-        StartCoroutine(LeftClickTutorial());
-    }
+
+    // Tutorial for left click
     public IEnumerator LeftClickTutorial()
     {
+        timer.StopCountDown();
+
+        tutorialText.text = "Nimbus wants to jump left and catch cloud!";
+        yield return new WaitForSeconds(2);
+
+        // Wait until Left Click
         if(!leftButton.IsInteractable())
         {
             ToggleLeftButton();
         }
-
-        // Wait until click
         leftButtonClicked = false;
-        timer.StopCountDown();
         leftButton.onClick.AddListener(OnLeftButtonClick);
-
-        Debug.Log("Start Waiting for user left click");
+        tutorialText.text = "Click the blue button on the left to jump left.";
         yield return new WaitUntil(() => leftButtonClicked);
 
         leftButton.onClick.RemoveListener(OnLeftButtonClick);
@@ -107,35 +132,41 @@ public class Tutorial : MonoBehaviour
     
         Debug.Log("Successfully triggered left jump!");
 
-        StartGameRuleExplanation();
+        StartRuleAndMistake();
     }
 
-    public void StartGameRuleExplanation()
+    // Tutorial for what happens when you make a mistake
+    private IEnumerator ExplainRuleAndMistake()
     {
-        StartCoroutine(ExplainRule());
-    }
-
-    private IEnumerator ExplainRule()
-    {
-        if(!rightButton.IsInteractable())
+        if(!leftButton.IsInteractable())
         {
-            ToggleRightButton();
+            ToggleLeftButton();
         }
 
-        rightButtonClicked = false;
+        leftButtonClicked = false;
         timer.StopCountDown();
-        rightButton.onClick.AddListener(OnRightButtonClick);
+        leftButton.onClick.AddListener(OnLeftButtonClick);
 
-        Debug.Log("Your goal is to get at least 5 points.");
-        yield return new WaitUntil(() => rightButtonClicked);
+        // Prompt User to click left to trigger a mistake
+        tutorialText.text = "Make Nimbus jump left to proceed.";
+        yield return new WaitUntil(() => leftButtonClicked);
 
-        rightButton.onClick.RemoveListener(OnRightButtonClick);
+        leftButton.onClick.RemoveListener(OnLeftButtonClick);
 
+        // Explain what happens when you make a mistake
+        tutorialText.text = "Mistake count increases everytime you jump to the wrong direction or attempt to jump before Nimbus lands on cloud.";
+        yield return new WaitForSeconds(5);
+        tutorialText.text = "Your final score is reminaing time - mistake counts. You need 5 points to pass the stage!";
+        yield return new WaitForSeconds(4);
+        tutorialText.text = "Make it to the top with as little mistakes and as much time left as possible!";
+        yield return new WaitForSeconds(4);
+        tutorialText.text = "Game will resume in 3 seconds";
+        yield return new WaitForSeconds(3);
         timer.StartCountDown();
-        ContinueGame();
+        EndOfTutorial();
     }
 
-    void ContinueGame()
+    void EndOfTutorial()
     {
         Debug.Log("Tutorial has finished and game should continue!");
         if(!leftButton.interactable)
@@ -146,6 +177,7 @@ public class Tutorial : MonoBehaviour
         {
             ToggleRightButton();
         }
+        tutorialCanvas.gameObject.SetActive(false);
     }
 
     private void OnLeftButtonClick()
