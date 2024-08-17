@@ -317,6 +317,11 @@ public class NimbusJump : MonoBehaviour
         }
     }
 
+    public void NextCloudPosition()
+    {
+        
+    }
+
     /*
         Checks if the jump direction is the correct direction or not.
         Input: direction to check

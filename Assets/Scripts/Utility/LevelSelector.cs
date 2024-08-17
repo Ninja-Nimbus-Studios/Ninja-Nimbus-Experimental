@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class LevelSelector : MonoBehaviour
 {
-    public int level;
+    public string level;
     public Text levelText;
     // Start is called before the first frame update
     void Start()
     {
-        levelText.text = level.ToString();
+        levelText.text = level;
     }
 
     public void OpenScene()
     {
-        SceneManager.LoadScene("Stage 2-" + level.ToString());
+        SceneManager.LoadScene("Stage " + level);
     }
 }

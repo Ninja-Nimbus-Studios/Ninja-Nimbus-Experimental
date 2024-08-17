@@ -13,8 +13,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private Button rightButton;
     [SerializeField] private TextMeshProUGUI tutorialText;
     [SerializeField] private Canvas tutorialCanvas; 
+    [SerializeField] private CloudSpawner cloudSpawner;
     public CountDownTimer timer;
-    private bool isTutorialPicked = false;
+    public static bool isTutorialPicked = false;
     private bool rightButtonClicked = false;
     private bool leftButtonClicked = false;
 
@@ -25,12 +26,14 @@ public class Tutorial : MonoBehaviour
 
     public void ChooseTutorial(string level)
     {
+        isTutorialPicked = true;
         switch(level)
         {
             case "Stage 1-1":
                 Start1_1Tutorial();
                 break;
             case "Stage 1-2":
+                Start1_2Tutorial();
                 Debug.Log("Stage 1-2 tutorial not implemented yet.");
                 break;
             default:
@@ -57,6 +60,11 @@ public class Tutorial : MonoBehaviour
         StartRightClickTutorial();
     }
 
+    public void Start1_2Tutorial()
+    {
+        StartJumpUpTutorial();
+    }
+
     /*
      * Coroutine starters for any of the tutorial
      */
@@ -71,6 +79,26 @@ public class Tutorial : MonoBehaviour
     public void StartRuleAndMistake()
     {
         StartCoroutine(ExplainRuleAndMistake());
+    }
+
+    public void StartJumpUpTutorial()
+    {
+        StartCoroutine(JumpUpTutorial());
+    }
+
+    public IEnumerator JumpUpTutorial()
+    {
+        Debug.Log("Jump Tutorial starts");
+        yield return new WaitUntil(() => (cloudSpawner.NextCloudPosition().x == cloudSpawner.CurrentCloudPosition().x));
+        tutorialCanvas.gameObject.SetActive(true);
+        tutorialText.text = "To jump up, press on both of the buttons at the same time";
+        yield return new WaitUntil(() => (PlayerPrefs.GetString("Direction") == NimbusJump.DIRECTION_U));
+
+        tutorialText.text = "Nicely Done! Game will resume in 3 seconds";
+        yield return new WaitForSeconds(3);
+        timer.StartCountDown();
+        EndOfTutorial();
+
     }
 
     // Tutorial for right click

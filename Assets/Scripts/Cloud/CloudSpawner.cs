@@ -14,7 +14,6 @@ public class CloudSpawner : MonoBehaviour
     public GameObject cloud; //reference to pipe
     private float prevHeight;
     private float newHeight;
-    public GameObject nimbus;
     private int column;
     private const int MIN_COLUMN = 0;
     private const int MAX_COLUMN = 2;
@@ -35,7 +34,7 @@ public class CloudSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeCloudSpawner();    
+        InitializeCloudSpawner();
     }
 
     // Update is called once per frame
@@ -182,6 +181,16 @@ public class CloudSpawner : MonoBehaviour
         prevHeight = newHeight;
         newHeight = prevHeight + CLOUD_DISTANCE;
         prevPos = horizontalPos;
+    }
+
+    public Vector3 NextCloudPosition()
+    {
+        return cloudCoordinates[NimbusJump.jumpCount + 1];
+    }
+
+    public Vector3 CurrentCloudPosition()
+    {
+        return cloudCoordinates[NimbusJump.jumpCount];
     }
 }
  

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameStatistics;
 
     public Tutorial tutorialObject;
-    public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1", "Stage 1-2"};
+    public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1"};
     public static bool isTutorial = false;
 
     // Status constants
