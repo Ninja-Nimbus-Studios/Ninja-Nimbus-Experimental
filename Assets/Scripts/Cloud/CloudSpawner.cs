@@ -8,13 +8,12 @@ using UnityEngine;
 
 public class CloudSpawner : MonoBehaviour
 {
-    const int EASY_SPAWNCOUNT = 3; // number of spawns
-    [SerializeField] public int midSpawnCount = 37; // number of spawns
+    [SerializeField] public int easySpawnCount; // number of spawns
+    [SerializeField] public int midSpawnCount; // number of spawns
     private float timer = 0;
     public GameObject cloud; //reference to pipe
     private float prevHeight;
     private float newHeight;
-    public GameObject nimbus;
     private int column;
     private const int MIN_COLUMN = 0;
     private const int MAX_COLUMN = 2;
@@ -35,7 +34,7 @@ public class CloudSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeCloudSpawner();    
+        InitializeCloudSpawner();
     }
 
     // Update is called once per frame
@@ -55,7 +54,7 @@ public class CloudSpawner : MonoBehaviour
         prevPos = 1f;
 
         // Spawn Clouds for different levels
-        EasySpawnCloud(EASY_SPAWNCOUNT);
+        EasySpawnCloud(easySpawnCount);
         MiddleSpawnCloud(midSpawnCount);
 
         // Log for debugging purposes
@@ -127,6 +126,71 @@ public class CloudSpawner : MonoBehaviour
             prevHeight = newHeight;
             newHeight = prevHeight + CLOUD_DISTANCE;
         }
+    }
+
+    void TutorialSpawnCloud(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnCloudAcross();
+            SpawnCloudAcross();
+            SpawnCloudAcross();
+            SpawnCloudAbove();
+        }
+    }
+
+    void SpawnCloudAbove()
+    {
+        GameObject newCloud = Instantiate(cloud); // create new pipe
+
+        // Determine x coordinate for newly spawned cloud
+        if(prevPos == RIGHT_COLUMN)
+        {
+            horizontalPos = RIGHT_COLUMN;
+        }
+        else
+        {
+            horizontalPos = LEFT_COLUMN;
+        }
+
+        newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
+        cloudCoordinates.Add(newCloud.transform.position);
+        clouds.Add(newCloud);
+        prevHeight = newHeight;
+        newHeight = prevHeight + CLOUD_DISTANCE;
+        prevPos = horizontalPos;
+    }
+
+    void SpawnCloudAcross()
+    {
+        GameObject newCloud = Instantiate(cloud); // create new pipe
+
+        // Determine x coordinate for newly spawned cloud
+        if(prevPos == LEFT_COLUMN)
+        {
+            horizontalPos = RIGHT_COLUMN;
+        }
+        else
+        {
+            horizontalPos = LEFT_COLUMN;
+        }
+
+        newCloud.transform.position = new Vector3(horizontalPos, newHeight, 0);
+        cloudCoordinates.Add(newCloud.transform.position);
+        clouds.Add(newCloud);
+        prevHeight = newHeight;
+        newHeight = prevHeight + CLOUD_DISTANCE;
+        prevPos = horizontalPos;
+    }
+
+    public Vector3 NextCloudPosition()
+    {
+        return cloudCoordinates[NimbusJump.jumpCount + 1];
+    }
+
+    public Vector3 CurrentCloudPosition()
+    {
+        return cloudCoordinates[NimbusJump.jumpCount];
     }
 }
  

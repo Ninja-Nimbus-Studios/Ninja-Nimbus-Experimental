@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +10,16 @@ public class GameManager : MonoBehaviour
     public GameObject gameClearCanvas;
     public GameObject gameStatistics;
 
+    public Tutorial tutorialObject;
+    public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1"};
+    public static bool isTutorial = false;
+
     // Status constants
     public const String STATUS_JUMP = "Jumping";
     public const String STATUS_REST = "Resting";
     public const String STATUS_GAMECLEAR = "GameClear";
     public const String STATUS_GAMEOVER = "GameOver";
+    public const string STATUS_TUTORIAL = "Tutorial";
 
     private void Start()
     {
@@ -39,7 +44,46 @@ public class GameManager : MonoBehaviour
         NimbusJump.jumpCount = 0;
 
         // Set Game Status
+        if(IsTutorialStage(DetectCurrentLevel()))
+        {
+            SetTutorialGameStatus();
+            tutorialObject.ChooseTutorial(DetectCurrentLevel());
+        }
+        else
+        {
+            SetRestGameStatus();
+        }
+    }
+
+    // Setters functions
+    public void SetRestGameStatus()
+    {
+        Debug.Log("GameManager: Rest game status set!");
         PlayerPrefs.SetString("Status", STATUS_REST);
+    }
+
+    public void SetTutorialGameStatus()
+    {
+        Debug.Log("GameManager: Tutorial game status set!");
+        PlayerPrefs.SetString("Status", STATUS_TUTORIAL);
+    }
+
+    public string DetectCurrentLevel()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
+    public bool IsTutorialStage(string level)
+    {
+        if(tutorialLevels.Contains(level))
+        {
+            isTutorial = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /*

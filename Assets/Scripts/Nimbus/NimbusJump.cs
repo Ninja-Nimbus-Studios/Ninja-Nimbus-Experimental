@@ -76,6 +76,7 @@ public class NimbusJump : MonoBehaviour
                     cloudIndicator = CloudSpawner.clouds[jumpCount].transform.GetChild(3).GetComponent<SpriteRenderer>();
                     cloudIndicator.color = new Color(0,255,0);
                     PlayerPrefs.SetString("Status", GameManager.STATUS_REST);
+                    Debug.Log("NimbusJump Update: Status set to REST");
                     jumpCount++;
 
                     bothButtonsPressed = false;
@@ -218,6 +219,7 @@ public class NimbusJump : MonoBehaviour
 
         // Set Game Status
         PlayerPrefs.SetString("Status", GameManager.STATUS_JUMP);
+        Debug.Log("NimbusJump.cs JumpTowardsTarget: JUMP");
     }
 
     /*
@@ -313,6 +315,11 @@ public class NimbusJump : MonoBehaviour
             prevPos = DIRECTION_L;
             Debug.Log("Previous Position: LEFT");
         }
+    }
+
+    public void NextCloudPosition()
+    {
+        
     }
 
     /*
