@@ -3,6 +3,6 @@
 ![](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)
 
 ![](https://img.shields.io/badge/docs-stable-green)
-# The Adventure of Ninja Nimbus
+# The Adventure of Ninja Nimbus - Experimental
 
-The Adventure of Ninja Nimbus is a iOS mobile game.
+This is a repo to experiment with design choices on Ninja Nimbus Game
