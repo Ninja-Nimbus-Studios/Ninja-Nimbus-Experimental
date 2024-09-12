@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1850146252857998898}
   - component: {fileID: 5462589209811746418}
   - component: {fileID: 5600418999227131779}
+  - component: {fileID: 2367673669169667313}
   m_Layer: 0
   m_Name: Ninja Nimbus
   m_TagString: Untagged
@@ -159,7 +160,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -203,8 +204,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.30412126, y: 0.28808492}
-  m_Size: {x: 8.233331, y: 8.137356}
+  m_Offset: {x: 0.057811555, y: 0.05541035}
+  m_Size: {x: 8.646986, y: 7.878846}
   m_Direction: 1
 --- !u!114 &5462589209811746418
 MonoBehaviour:
@@ -237,6 +238,21 @@ MonoBehaviour:
   moveSpeed: 20
   rb: {fileID: 568723292962517267}
   gameManager: {fileID: 0}
+--- !u!114 &2367673669169667313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392045764045924827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa2ddc78521f4af298bfff3ce4c858e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalForce: 10
+  horizontalForce: 6.5
+  rb: {fileID: 568723292962517267}
 --- !u!1 &8806068072635053243
 GameObject:
   m_ObjectHideFlags: 0

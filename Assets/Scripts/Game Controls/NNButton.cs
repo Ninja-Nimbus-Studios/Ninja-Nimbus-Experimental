@@ -6,14 +6,15 @@ public class NNButtonHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public bool isLeftButton;
     public NimbusJump nimbusAction;
+
     public void OnPointerDown(PointerEventData eventData){
         if(isLeftButton)
         {
-            nimbusAction.OnLeftPressed();
+            // nimbusAction.OnLeftPressed(); // This is for NimbusJump class jump
         } 
         else
         {
-            nimbusAction.OnRightPressed();
+            // nimbusAction.OnRightPressed(); // This is for NimbusJump class jump
         }
     }
 
