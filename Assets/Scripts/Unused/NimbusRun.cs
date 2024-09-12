@@ -1,3 +1,6 @@
+// UNUSED
+// original game mechanic where nimbus is controlled by jumping up with physics perclick
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;

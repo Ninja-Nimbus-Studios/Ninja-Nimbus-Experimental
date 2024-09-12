@@ -1,3 +1,9 @@
+// UNUSED
+// Used with pluginhelper.cs for filtering out the signal filter in order to read and process data. 
+// We were able to check if signal was raw or not by looking at the unfiltered data, but this was needed in verifying whether the signal was REALLY raw or not
+// in a rigorous way
+
+
 using UnityEngine;
 
 /**

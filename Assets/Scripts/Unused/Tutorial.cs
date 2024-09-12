@@ -1,3 +1,6 @@
+// UNUSED
+// Tutorial stage to teach user controls
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;

@@ -1,3 +1,5 @@
+// UNUSED
+// Logic to move the ground from right to left using repeated animation
 
 using UnityEngine;
 using UnityEngine.UI;

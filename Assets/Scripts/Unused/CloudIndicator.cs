@@ -1,3 +1,7 @@
+// UNUSED
+// create red cloud indicator in the middle of the spawned clouds
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

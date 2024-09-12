@@ -1,3 +1,6 @@
+// UNUSED
+// Logic to trigger death when Nimbus reaches the left or right border of screen
+
 using UnityEditor;
 using UnityEngine;
 

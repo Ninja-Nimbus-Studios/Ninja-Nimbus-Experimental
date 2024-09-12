@@ -1,3 +1,6 @@
+// UNUSED
+// This file was for making animation for when nimbus clears a level and enters a new level
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,6 @@
+// UNUSED
+// original game obstacles(pipes) where the obstacles spawn randomly with in-game pipe asset
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

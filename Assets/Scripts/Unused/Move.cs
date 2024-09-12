@@ -1,3 +1,6 @@
+// UNUSED
+// Logic to move objects to the left per time. This was used for original pipe version of game
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

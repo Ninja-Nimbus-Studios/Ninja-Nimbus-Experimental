@@ -1,3 +1,15 @@
+// UNUSED
+// Huge plugin helper function that allows data reading for accelerometer and gyroscope data reading when the phone is vibrating.
+// This file needs to be used with the correct plugin set up: 
+// The mental model is: xcode(edit swift/h/mm files) -> run in Unity -> renders automatically to swift and onto iOS
+// you can not make swift files in Unity so you first make a "framework" in xcode and make a swift file, header file, and objective-c file.
+// You then drag these files into Unity -> Assets -> Plugins -> iOS -> <YOUR-CHOICE-OF-PATH>
+// Then write two scripts, one in Editor folder for Swift code post processing. The other C# script is in charge of IOS plugin. You would reference swift functions/objects/classes in this file through dll(Dynamically Linked Library).
+// Build and run the project and Unity will automatically create xcodeproj file. This way, the path creation is done automatically.
+// Now go ahead and edit function in swift!
+
+// contact tatsuokumaus@gmail.com for a detailed pdf for working on this!
+
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;

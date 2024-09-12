@@ -1,3 +1,6 @@
+// UNUSED
+// Oriignal score mechanic for clouds using onTriggerEnter2D and collision detection
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
