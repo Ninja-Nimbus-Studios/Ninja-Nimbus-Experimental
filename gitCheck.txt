@@ -1,0 +1,1 @@
+This stable version demos Ninja Nimbus with stages with older jump mechanic
