@@ -98,6 +98,9 @@ public class NimbusJump : MonoBehaviour
                             Debug.Log("You Lost!");
                         }
                     }
+
+                    //Replenishes Energy
+                    NimbusEvents.TriggerOnCloudLatched();
                 }
             }
             catch (NullReferenceException ex)
