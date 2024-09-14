@@ -6,14 +6,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CloudMechanic : MonoBehaviour
+public class CloudTouchOnRight : MonoBehaviour
 {
     public GameObject point;
+    [SerializeField] CapsuleCollider rCollider;
+    [SerializeField] CapsuleCollider lCollider;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("On right side");
         Score.score++;
+
+        rCollider.enabled = false;
+        lCollider.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

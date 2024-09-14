@@ -38,20 +38,20 @@ public class CountDownTimer : MonoBehaviour
         }
 
         // While game is timing, update display with current time
-        if (isTiming)
-        {
-            currentTime -= Time.deltaTime;
+        // if (isTiming)
+        // {
+        //     currentTime -= Time.deltaTime;
 
-            // Countdown should stop if GameClear has not been called and time is 0
-            if (currentTime <= 0)
-            {
-                currentTime = 0;
-                StopCountDown();
-                gameManager.GameOver();
-            }
+        //     // Countdown should stop if GameClear has not been called and time is 0
+        //     if (currentTime <= 0)
+        //     {
+        //         currentTime = 0;
+        //         StopCountDown();
+        //         gameManager.GameOver();
+        //     }
 
-            UpdateTimerDisplay();
-        }
+        //     UpdateTimerDisplay();
+        // }
     }
 
     public void StartCountDown()
