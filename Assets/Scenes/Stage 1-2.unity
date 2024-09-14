@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 925186379}
+    - target: {fileID: 7463615071853717080, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+      propertyPath: <CloudPowerDepletionRate>k__BackingField
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -495,6 +499,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2717399526676763017, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717399526676763017, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.3782043
+      objectReference: {fileID: 0}
     - target: {fileID: 4120125839355951056, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -578,6 +590,18 @@ PrefabInstance:
     - target: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
       propertyPath: m_Name
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498943522484603967, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498943522484603967, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -690,6 +714,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.00048828125
       objectReference: {fileID: 0}
+    - target: {fileID: 1022022179805310451, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.22262573
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869847283911569825, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3122033811032986055, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -770,9 +802,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516100212581786084, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.2592773
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285123417004992979, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8126648592563614108, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
       propertyPath: m_Name
       value: GameClear
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126648592563614108, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

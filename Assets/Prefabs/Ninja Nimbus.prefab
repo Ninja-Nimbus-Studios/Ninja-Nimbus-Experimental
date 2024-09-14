@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5462589209811746418}
   - component: {fileID: 5600418999227131779}
   - component: {fileID: 2367673669169667313}
+  - component: {fileID: 7463615071853717080}
   m_Layer: 0
   m_Name: Ninja Nimbus
   m_TagString: Untagged
@@ -239,6 +240,7 @@ MonoBehaviour:
   rb: {fileID: 568723292962517267}
   gameManager: {fileID: 0}
 --- !u!114 &2367673669169667313
+--- !u!114 &7463615071853717080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,6 +255,12 @@ MonoBehaviour:
   verticalForce: 10
   horizontalForce: 6.5
   rb: {fileID: 568723292962517267}
+  m_Script: {fileID: 11500000, guid: 68fb50d6e69dec34ab3ba6761c798336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxCloudPower>k__BackingField: 100
+  <CloudPowerDepletionRate>k__BackingField: 5
+  <CloudRechargeRate>k__BackingField: 40
 --- !u!1 &8806068072635053243
 GameObject:
   m_ObjectHideFlags: 0
