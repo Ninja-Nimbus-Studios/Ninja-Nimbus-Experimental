@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class CloudTouchOnRight : MonoBehaviour
 {
-    public GameObject point;
-    [SerializeField] CapsuleCollider rCollider;
-    [SerializeField] CapsuleCollider lCollider;
+    public GameObject cloud;
+    [SerializeField] CapsuleCollider2D rCollider;
+    [SerializeField] CapsuleCollider2D lCollider;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,12 +18,12 @@ public class CloudTouchOnRight : MonoBehaviour
         Debug.Log("On right side");
         Score.score++;
 
-        rCollider.enabled = false;
         lCollider.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        point.gameObject.SetActive(false); // disabling this will make the clouds disappear
+        
+        // cloud.gameObject.SetActive(false); // disabling this will make the clouds disappear
     }
 }

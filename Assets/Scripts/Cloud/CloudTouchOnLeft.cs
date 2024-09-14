@@ -9,8 +9,8 @@ using UnityEngine;
 public class CloudTouchOnLeft : MonoBehaviour
 {
     public GameObject cloud;
-    [SerializeField] CapsuleCollider rCollider;
-    [SerializeField] CapsuleCollider lCollider;
+    [SerializeField] CapsuleCollider2D rCollider;
+    [SerializeField] CapsuleCollider2D lCollider;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,11 +18,10 @@ public class CloudTouchOnLeft : MonoBehaviour
         Score.score++;
 
         rCollider.enabled = false;
-        lCollider.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        cloud.gameObject.SetActive(false); // disabling this will make the clouds disappear
+        // cloud.gameObject.SetActive(false); // disabling this will make the clouds disappear
     }
 }

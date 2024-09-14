@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03d77a339f4647d2a3299ed650325af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: {fileID: 0}
+  cloud: {fileID: 0}
   rCollider: {fileID: 0}
   lCollider: {fileID: 0}
 --- !u!70 &401110088174699044
@@ -164,8 +164,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3992189, y: 0.010789852}
-  m_Size: {x: 2, y: 2.8}
+  m_Offset: {x: -0.086111575, y: 0.059712924}
+  m_Size: {x: 1.7651693, y: 2.8978457}
   m_Direction: 0
 --- !u!1 &4629432361350505334
 GameObject:
@@ -394,6 +394,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.46395695, y: -0.010789676}
-  m_Size: {x: 2, y: 2.8}
+  m_Offset: {x: 0.06278792, y: 0.16533321}
+  m_Size: {x: 1.7064619, y: 3.1522455}
   m_Direction: 0

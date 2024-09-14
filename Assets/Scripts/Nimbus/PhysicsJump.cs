@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PhysicsJump : MonoBehaviour 
@@ -25,13 +26,15 @@ public class PhysicsJump : MonoBehaviour
 
     void JumpRight()
     {
-        rb.velocity = Vector3.zero;
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(horizontalForce, verticalForce), ForceMode2D.Impulse);
     }
 
     void JumpLeft()
     {
-        rb.velocity = Vector3.zero;
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(-horizontalForce, verticalForce), ForceMode2D.Impulse);
     }
 }
