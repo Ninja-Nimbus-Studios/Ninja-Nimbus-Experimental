@@ -11,7 +11,7 @@ public class CloudSpawner : MonoBehaviour
     [SerializeField] public int easySpawnCount; // number of spawns
     [SerializeField] public int midSpawnCount; // number of spawns
     private float timer = 0;
-    public GameObject cloud; //reference to pipe
+    public GameObject cloud; //reference to cloud
     private float prevHeight;
     private float newHeight;
     private int column;

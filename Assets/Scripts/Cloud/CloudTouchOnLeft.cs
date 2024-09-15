@@ -6,18 +6,22 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CloudMechanic : MonoBehaviour
+public class CloudTouchOnLeft : MonoBehaviour
 {
-    public GameObject point;
-
+    public GameObject cloud;
+    [SerializeField] CapsuleCollider2D rCollider;
+    [SerializeField] CapsuleCollider2D lCollider;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("On left side!");
         Score.score++;
+
+        rCollider.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        point.gameObject.SetActive(false); // disabling this will make the clouds disappear
+        // cloud.gameObject.SetActive(false); // disabling this will make the clouds disappear
     }
 }
