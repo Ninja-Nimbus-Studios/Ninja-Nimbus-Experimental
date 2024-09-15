@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2367673669169667313}
   - component: {fileID: 7463615071853717080}
   - component: {fileID: 8310957900257698950}
+  - component: {fileID: 1505340327568401026}
   m_Layer: 0
   m_Name: Ninja Nimbus
   m_TagString: Untagged
@@ -66,7 +67,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.76, y: -1.54, z: 0}
-  m_LocalScale: {x: 0.30030826, y: 0.30030826, z: 0.30030826}
+  m_LocalScale: {x: 0.3003083, y: 0.30030826, z: 0.30030826}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6014084339801533242}
@@ -136,7 +137,7 @@ Animator:
   m_GameObject: {fileID: 1392045764045924827}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ff26d190d1f54ad7b918c7da865d1e0, type: 2}
+  m_Controller: {fileID: 9100000, guid: b73f5ae3b7224274b81d5294cf735212, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -206,8 +207,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.057811555, y: 0.05541035}
-  m_Size: {x: 8.646986, y: 7.878846}
+  m_Offset: {x: 0.48220295, y: -0.45296112}
+  m_Size: {x: 6.3141537, y: 5.805789}
   m_Direction: 1
 --- !u!114 &5462589209811746418
 MonoBehaviour:
@@ -270,6 +271,7 @@ MonoBehaviour:
   verticalForce: 10
   horizontalForce: 6.5
   rb: {fileID: 568723292962517267}
+  cloudPower: {fileID: 2367673669169667313}
 --- !u!114 &8310957900257698950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +285,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 568723292962517267}
-  latchSpeed: 5
+  latchSpeed: 10
+--- !u!114 &1505340327568401026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392045764045924827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff7847cb91c39140a36637b3633694c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7135070874166265108}
 --- !u!1 &8806068072635053243
 GameObject:
   m_ObjectHideFlags: 0
