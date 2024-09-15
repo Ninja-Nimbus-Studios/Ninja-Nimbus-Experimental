@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 0}
-  rCollider: {fileID: 0}
-  lCollider: {fileID: 0}
+  rCollider: {fileID: 401110088174699044}
+  lCollider: {fileID: 8677957276995771666}
 --- !u!70 &401110088174699044
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 4629432361350505334}
-  rCollider: {fileID: 0}
-  lCollider: {fileID: 0}
+  rCollider: {fileID: 401110088174699044}
+  lCollider: {fileID: 8677957276995771666}
 --- !u!70 &8677957276995771666
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

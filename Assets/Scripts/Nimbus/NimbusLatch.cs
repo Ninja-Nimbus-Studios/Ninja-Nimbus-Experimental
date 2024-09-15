@@ -41,12 +41,18 @@ public class NimbusLatch : MonoBehaviour
                 // Latch to the right side of the cloud
                 latchTarget = other.transform.parent.position + latchRightOffset;
                 Debug.Log($"Right: {latchTarget}");
+
+                //Check Flip
+                Flip(true);
             }
             else if (other.gameObject.name == "Point Left")
             {
                 // Latch to the left side of the cloud
                 latchTarget = other.transform.parent.position + latchLeftOffset;
                 Debug.Log($"Left: {latchTarget}");
+
+                //Check Flip
+                Flip(false);
             }
 
             // Trigger latch behavior
@@ -64,6 +70,7 @@ public class NimbusLatch : MonoBehaviour
         currentCloudTrigger = cloudTrigger;
 
         // Optionally: Play latch animation here
+        NimbusEvents.TriggerOnCloudLatched();  // Notify other scripts that Nimbus has latched
         // Disable cloud trigger after latching to prevent further interactions
 
         // cloudTrigger.gameObject.GetComponent<Collider2D>().enabled = false;
@@ -90,4 +97,16 @@ public class NimbusLatch : MonoBehaviour
         //     currentCloudTrigger.enabled = true;
         // }
     }
+
+    private void Flip(bool latchRight){
+        bool isFacingRight = transform.localScale.x > 0;
+
+        if(isFacingRight && latchRight){
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }else if (!isFacingRight && !latchRight){
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+
 }

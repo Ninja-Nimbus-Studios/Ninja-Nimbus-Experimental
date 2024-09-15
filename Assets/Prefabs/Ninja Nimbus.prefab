@@ -241,6 +241,20 @@ MonoBehaviour:
   rb: {fileID: 568723292962517267}
   gameManager: {fileID: 0}
 --- !u!114 &2367673669169667313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392045764045924827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fb50d6e69dec34ab3ba6761c798336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxCloudPower>k__BackingField: 100
+  <CloudPowerDepletionRate>k__BackingField: 10
+  <CloudRechargeRate>k__BackingField: 40
 --- !u!114 &7463615071853717080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,12 +270,6 @@ MonoBehaviour:
   verticalForce: 10
   horizontalForce: 6.5
   rb: {fileID: 568723292962517267}
-  m_Script: {fileID: 11500000, guid: 68fb50d6e69dec34ab3ba6761c798336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxCloudPower>k__BackingField: 100
-  <CloudPowerDepletionRate>k__BackingField: 5
-  <CloudRechargeRate>k__BackingField: 40
 --- !u!114 &8310957900257698950
 MonoBehaviour:
   m_ObjectHideFlags: 0

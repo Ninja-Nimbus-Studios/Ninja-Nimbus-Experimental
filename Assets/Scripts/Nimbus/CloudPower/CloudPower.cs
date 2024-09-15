@@ -23,10 +23,12 @@ public class CloudPower : MonoBehaviour
 
     private void OnEnable(){
         NimbusEvents.OnCloudLatched += RechargeCloudPower;
+        NimbusEvents.OnJumped += JumpCloudPower;
     }
 
     private void OnDisable(){
         NimbusEvents.OnCloudLatched -= RechargeCloudPower;
+        NimbusEvents.OnJumped -= JumpCloudPower;
     }
 
     private void Update(){
@@ -41,6 +43,13 @@ public class CloudPower : MonoBehaviour
         CurrentCloudPower += CloudRechargeRate;
         if(CurrentCloudPower > MaxCloudPower){
             CurrentCloudPower = MaxCloudPower;
+        }
+    }
+
+    public void JumpCloudPower(){
+        CurrentCloudPower -= 20;
+        if(CurrentCloudPower > 0 && CurrentCloudPower < 10){
+            CurrentCloudPower = 0;
         }
     }
 }
