@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 977197918563000572}
   - component: {fileID: 6303183149605470771}
   - component: {fileID: 4227580693482459284}
+  - component: {fileID: 9166831711425518457}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36b805b1289845b58d1bf4e56d21880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStartCanvas: {fileID: 8308727488507064236, guid: 79a07db23b6eb4548a9100320dba99a3, type: 3}
-  gameOverCanvas: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
-  gameInterface: {fileID: 5595073918728164145, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
-  gameClearCanvas: {fileID: 8126648592563614108, guid: 9e8f8467fb4e947f389f8cde9fc802b7, type: 3}
+  gameOverCanvas: {fileID: 0}
+  gameInterface: {fileID: 0}
+  gameClearCanvas: {fileID: 0}
   gameStatistics: {fileID: 0}
+  Nimbus: {fileID: 0}
+  tutorialObject: {fileID: 0}
 --- !u!114 &4227580693482459284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +64,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2a129f1845f4ae8a61a8ccd625ff88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midSpawnCount: 37
+  easySpawnCount: 10
+  midSpawnCount: 10
   cloud: {fileID: 4629432361350505334, guid: 5ea6230e64cc044b4bfb206622b90b49, type: 3}
-  nimbus: {fileID: 0}
+--- !u!114 &9166831711425518457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555238503765040588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14251ba8209c1c744bbc74140c1e3bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudPrefab: {fileID: 4629432361350505334, guid: 5ea6230e64cc044b4bfb206622b90b49, type: 3}
+  chunkHeight: 10
+  cloudsPerChunk: 5
+  minCloudDistance: 2
+  maxCloudDistance: 4
