@@ -225,7 +225,8 @@ MonoBehaviour:
   character: {fileID: 261798230592449584}
   leftBoundary: -10
   rightBoundary: 0
-  gameManager: {fileID: 0}
+  bottomBoundary: 0
+  gameManager: {fileID: 6303183149605470771, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
 --- !u!114 &5600418999227131779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa2ddc78521f4af298bfff3ce4c858e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalForce: 10
-  horizontalForce: 6.5
+  verticalForce: 11
+  horizontalForce: 8
   rb: {fileID: 568723292962517267}
   cloudPower: {fileID: 2367673669169667313}
 --- !u!114 &8310957900257698950
