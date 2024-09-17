@@ -9,11 +9,18 @@ public class PhysicsJump : MonoBehaviour
     //inspector header
     [Header("Component References")]
     public Rigidbody2D rb;
+    private bool isJumping;
+    private Camera mainCamera;
+    public float leftBoundary;
+    public float rightBoundary;
     [SerializeField] CloudPower cloudPower;
 
     void Start()
     {
         PauseMovement();
+        mainCamera = Camera.main;
+        leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
+        rightBoundary = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
     }
     void Update()
     {
@@ -27,6 +34,23 @@ public class PhysicsJump : MonoBehaviour
             else
             {
                 Jump(false);
+            }
+        }
+
+        if(isJumping)
+        {
+            // Check for boundary collision
+            if (transform.position.x <= leftBoundary)
+            {
+                // Bounce off the left wall
+                Debug.Log("Nimbus is at wall!");
+                rb.velocity = new Vector2(Mathf.Abs(rb.velocity.x), rb.velocity.y); // Flip the x velocity
+            }
+            else if (transform.position.x >= rightBoundary)
+            {
+                // Bounce off the right wall
+                Debug.Log("Nimbus is at wall!");
+                rb.velocity = new Vector2(-Mathf.Abs(rb.velocity.x), rb.velocity.y); // Flip the x velocity
             }
         }
     }
@@ -53,7 +77,9 @@ public class PhysicsJump : MonoBehaviour
         }else{
             NimbusEvents.TriggerOnJumped();
         }
+
         rb.AddForce(new Vector2(jumpForce, verticalForce), ForceMode2D.Impulse);
+        isJumping = true;
     }
 
     //
@@ -72,5 +98,6 @@ public class PhysicsJump : MonoBehaviour
     {
         rb.isKinematic = true;
         rb.velocity = Vector2.zero;
+        isJumping = false;
     }
 }
