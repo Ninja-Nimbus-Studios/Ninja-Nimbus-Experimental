@@ -34,7 +34,7 @@ public class CloudSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeCloudSpawner();
+        //InitializeCloudSpawner();
     }
 
     // Update is called once per frame

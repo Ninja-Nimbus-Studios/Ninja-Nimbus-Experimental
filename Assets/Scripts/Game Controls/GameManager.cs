@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameInterface;
     public GameObject gameClearCanvas;
     public GameObject gameStatistics;
+    public GameObject Nimbus;
 
     public Tutorial tutorialObject;
     public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1"};
