@@ -11,7 +11,6 @@ public class ViewManager : MonoBehaviour
     void Start()
     {
         backgroundOffset = background.position - transform.position;
-        Debug.Log($"BackgroundOffset: {backgroundOffset.ToString()}");
     }
 
     private void LateUpdate()

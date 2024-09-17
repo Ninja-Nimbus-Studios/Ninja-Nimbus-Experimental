@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
         gameOverCanvas.SetActive(true);
+        NimbusEvents.TriggerOnGameEnd();
     }
 
     private void UnlockNewLevel()

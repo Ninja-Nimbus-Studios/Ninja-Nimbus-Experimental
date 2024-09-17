@@ -10,8 +10,8 @@ public class LevelGenerator : MonoBehaviour
     public float minCloudDistance;
     public float maxCloudDistance;
 
-    private List<GameObject> activeChunks = new List<GameObject>();
-    private float highestChunkY = 0f;
+    private Queue<GameObject> activeChunks = new Queue<GameObject>();
+    private float highestChunkY = 4f;
     private System.Random random;
     private GameObject nimbus;
 
@@ -45,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
             // Additional cloud setup if needed
         }
 
-        activeChunks.Add(chunk);
+        activeChunks.Enqueue(chunk);
         highestChunkY += chunkHeight;
     }
 
@@ -64,7 +64,10 @@ public class LevelGenerator : MonoBehaviour
 
     void RemoveDistantChunks()
     {
-        // Implement logic to remove chunks that are far below the player
+        if(activeChunks.Peek().transform.position.y < nimbus.transform.position.y - chunkHeight * 2)
+        {
+            Destroy(activeChunks.Dequeue());
+        }
     }
 
     void GenerateInitialChunks()

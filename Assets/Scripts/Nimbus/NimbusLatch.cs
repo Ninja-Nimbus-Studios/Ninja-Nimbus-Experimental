@@ -22,7 +22,6 @@ public class NimbusLatch : MonoBehaviour
             // Check if Nimbus has reached the latch point
             if (Vector2.Distance(transform.position, latchTarget) < 0.1f)
             {
-                Debug.Log($"Velocity: {rb.velocity}");
                 CompleteLatch();
             }
         }
@@ -30,7 +29,6 @@ public class NimbusLatch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collision detected with: " + other.gameObject.name);
 
         // Check if the other collider is one of the left or right points
         if (other.gameObject.name == "Point Right" || other.gameObject.name == "Point Left")
@@ -40,7 +38,6 @@ public class NimbusLatch : MonoBehaviour
             {
                 // Latch to the right side of the cloud
                 latchTarget = other.transform.parent.position + latchRightOffset;
-                Debug.Log($"Right: {latchTarget}");
 
                 //Check Flip
                 Flip(true);
@@ -49,7 +46,6 @@ public class NimbusLatch : MonoBehaviour
             {
                 // Latch to the left side of the cloud
                 latchTarget = other.transform.parent.position + latchLeftOffset;
-                Debug.Log($"Left: {latchTarget}");
 
                 //Check Flip
                 Flip(false);
@@ -80,7 +76,6 @@ public class NimbusLatch : MonoBehaviour
     {
         // Stop latching, Nimbus is now "latched" onto the cloud
         isLatching = false;
-        Debug.Log("Got to position");
 
         // Optionally: Play the "latched" animation here
     }
