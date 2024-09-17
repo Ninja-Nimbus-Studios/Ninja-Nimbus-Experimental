@@ -14,6 +14,9 @@ public class PhysicsJump : MonoBehaviour
     public float leftBoundary;
     public float rightBoundary;
     [SerializeField] CloudPower cloudPower;
+    [SerializeField] Nimbus nimbus;
+
+    const float JUMP_POWER_AT_0_ENERGY = 0f;
 
     void Start()
     {
@@ -57,6 +60,11 @@ public class PhysicsJump : MonoBehaviour
 
     void Jump(bool isJumpingRight)
     {
+        // don't allow jump if Nimbus is falling or cloud power is 0
+        if(cloudPower.CurrentCloudPower <= 0 || nimbus.NimbusState == NimbusState.Falling){
+            return;
+        }
+
         rb.isKinematic = false;
         rb.velocity = Vector2.zero;
         float jumpForce;
@@ -72,7 +80,7 @@ public class PhysicsJump : MonoBehaviour
 
         // Check if there is enough cloud power to jump
         if(cloudPower.CurrentCloudPower <= 0){
-            jumpForce *= 0.25f;
+            jumpForce *= JUMP_POWER_AT_0_ENERGY;
             NimbusEvents.TriggerOnFalling();
         }else{
             NimbusEvents.TriggerOnJumped();

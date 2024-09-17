@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class NimbusLatch : MonoBehaviour
 {
-    public Rigidbody2D rb;
     public float latchSpeed = 5f;
     private bool isLatching = false;
     private Vector3 latchTarget;
@@ -11,6 +10,11 @@ public class NimbusLatch : MonoBehaviour
     private Vector3 latchLeftOffset = new Vector2(-1.19f, -0.37f);
     private Vector3 latchRightOffset = new Vector2(1.3f, -0.35f);
     //(-4.29, 2.53) - (-3.1, 2.9)
+
+    [Header("Component References")]
+    [SerializeField] CloudPower cloudPower;
+    [SerializeField] Nimbus nimbus;
+    public Rigidbody2D rb;
     
     void Update()
     {
@@ -25,6 +29,10 @@ public class NimbusLatch : MonoBehaviour
                 Debug.Log($"Velocity: {rb.velocity}");
                 CompleteLatch();
             }
+        }
+
+        if(nimbus.NimbusState == NimbusState.Latching && cloudPower.CurrentCloudPower <= 0){
+            NimbusEvents.TriggerOnFalling();
         }
     }
 
