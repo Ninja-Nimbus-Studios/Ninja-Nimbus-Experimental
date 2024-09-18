@@ -642,9 +642,9 @@ GameObject:
   - component: {fileID: 1177439215948393945}
   - component: {fileID: 4312000032111735397}
   - component: {fileID: 4743529810589975548}
-  - component: {fileID: 3451477030983110663}
+  - component: {fileID: 389162545682999587}
   m_Layer: 5
-  m_Name: Death Reason Field
+  m_Name: Final Score Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3451477030983110663
+--- !u!114 &389162545682999587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -777,10 +777,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7015236551959548722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ab22f6c13ee49afb6b58603016ea0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bd47777a265d374093c5ec345f3010c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathReasonField: {fileID: 4743529810589975548}
+  scoreField: {fileID: 4743529810589975548}
 --- !u!1 &8853663273061536030
 GameObject:
   m_ObjectHideFlags: 0

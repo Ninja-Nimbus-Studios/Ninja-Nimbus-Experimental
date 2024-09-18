@@ -46,11 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36b805b1289845b58d1bf4e56d21880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverCanvas: {fileID: 0}
-  gameInterface: {fileID: 0}
-  gameClearCanvas: {fileID: 0}
-  gameStatistics: {fileID: 0}
-  Nimbus: {fileID: 0}
+  gameOverCanvas: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
+  gameInterface: {fileID: 5595073918728164145, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
+  Nimbus: {fileID: 1392045764045924827, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
   tutorialObject: {fileID: 0}
 --- !u!114 &4227580693482459284
 MonoBehaviour:

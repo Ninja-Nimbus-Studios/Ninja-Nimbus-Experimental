@@ -6,7 +6,7 @@ public class GameStats : Singleton<GameStats>
 {
     [SerializeField]HeightScore heightScore;
     public float HeightScore => heightScore.HighestScore;
-  protected override void Awake()
+    protected override void Awake()
       {
           base.Awake();
           if (heightScore == null) 

@@ -45,11 +45,11 @@ GameObject:
   - component: {fileID: 568723292962517267}
   - component: {fileID: 1850146252857998898}
   - component: {fileID: 5462589209811746418}
-  - component: {fileID: 5600418999227131779}
   - component: {fileID: 2367673669169667313}
   - component: {fileID: 7463615071853717080}
   - component: {fileID: 8310957900257698950}
   - component: {fileID: 1505340327568401026}
+  - component: {fileID: 4993413508685412663}
   m_Layer: 0
   m_Name: Ninja Nimbus
   m_TagString: Untagged
@@ -227,21 +227,6 @@ MonoBehaviour:
   rightBoundary: 0
   bottomBoundary: 0
   gameManager: {fileID: 6303183149605470771, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
---- !u!114 &5600418999227131779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392045764045924827}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a531dadee88ee488da302de0d65eb84c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 20
-  rb: {fileID: 568723292962517267}
-  gameManager: {fileID: 0}
 --- !u!114 &2367673669169667313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +261,7 @@ MonoBehaviour:
   leftBoundary: 0
   rightBoundary: 0
   cloudPower: {fileID: 2367673669169667313}
+  nimbus: {fileID: 4993413508685412663}
 --- !u!114 &8310957900257698950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b72f561a08554a1eafdb2f85be0c3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 568723292962517267}
   latchSpeed: 10
+  cloudPower: {fileID: 2367673669169667313}
+  nimbus: {fileID: 4993413508685412663}
+  rb: {fileID: 568723292962517267}
 --- !u!114 &1505340327568401026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +291,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7135070874166265108}
+--- !u!114 &4993413508685412663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392045764045924827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1b659cb14434e42bf716309739400a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NimbusState: 0
 --- !u!1 &8806068072635053243
 GameObject:
   m_ObjectHideFlags: 0
