@@ -27,5 +27,9 @@ public class UIButton : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Main Game Scene");
+    }
 
 }
