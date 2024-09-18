@@ -14,7 +14,6 @@ public class CloudTouchOnLeft : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("On left side!");
         Score.score++;
 
         rCollider.enabled = false;
