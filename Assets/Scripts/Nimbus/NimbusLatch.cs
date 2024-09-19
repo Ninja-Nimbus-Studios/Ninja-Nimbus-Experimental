@@ -45,7 +45,8 @@ public class NimbusLatch : MonoBehaviour
             if (other.gameObject.name == "Point Right")
             {
                 // Latch to the right side of the cloud
-                latchTarget = other.transform.parent.position + latchRightOffset;
+                latchTarget = other.transform.position;
+                Debug.Log($"Right: {latchTarget}");
 
                 //Check Flip
                 Flip(true);
@@ -53,7 +54,8 @@ public class NimbusLatch : MonoBehaviour
             else if (other.gameObject.name == "Point Left")
             {
                 // Latch to the left side of the cloud
-                latchTarget = other.transform.parent.position + latchLeftOffset;
+                latchTarget = other.transform.position;
+                Debug.Log($"Left: {latchTarget}");
 
                 //Check Flip
                 Flip(false);

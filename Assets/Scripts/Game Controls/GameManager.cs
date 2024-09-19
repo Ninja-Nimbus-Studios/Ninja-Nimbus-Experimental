@@ -7,11 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public GameObject gameOverCanvas;
     public GameObject gameInterface;
-    public GameObject gameClearCanvas;
-    public GameObject gameStatistics;
     public GameObject Nimbus;
 
-    public Tutorial tutorialObject;
+    // public Tutorial tutorialObject;
     public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1"};
     public static bool isTutorial = false;
 
@@ -35,8 +33,6 @@ public class GameManager : MonoBehaviour
         // Set Canvas
         gameInterface.SetActive(true);
         gameOverCanvas.SetActive(false);
-        gameClearCanvas.SetActive(false);
-        gameStatistics.SetActive(true);
 
         // Reset time scale
         Time.timeScale = 1;
@@ -48,7 +44,7 @@ public class GameManager : MonoBehaviour
         if(IsTutorialStage(DetectCurrentLevel()))
         {
             SetTutorialGameStatus();
-            tutorialObject.ChooseTutorial(DetectCurrentLevel());
+            // tutorialObject.ChooseTutorial(DetectCurrentLevel());
         }
         else
         {
@@ -115,7 +111,6 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f;
         gameInterface.SetActive(false);
-        gameClearCanvas.SetActive(true);
         // Score.CalculateFinalScore();
         UnlockNewLevel();
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -15,11 +16,18 @@ public class LevelGenerator : MonoBehaviour
     private System.Random random;
     private GameObject nimbus;
 
+    private float rightEdge;
+    private float leftEdge;
+    private Camera mainCamera;
+
     void Start()
     {
+        mainCamera = Camera.main;
         random = new System.Random(); // Or use a seed for reproducible levels
         GenerateInitialChunks();
         nimbus = GameObject.Find("Ninja Nimbus");
+        rightEdge = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
+        leftEdge = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
     }
 
     void Update()
@@ -51,7 +59,7 @@ public class LevelGenerator : MonoBehaviour
 
     Vector3 GetNextCloudPosition(Vector3 chunkPosition, int cloudIndex)
     {
-        float x = (float)(random.NextDouble() * 10 - 5); // Random X between -5 and 5
+        float x = Random.Range(leftEdge, rightEdge); // Random X between -5 and 5
         float y = chunkPosition.y + (cloudIndex) * (chunkHeight / (cloudsPerChunk));
         return new Vector3(x, y, 0);
     }
