@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NimbusEvents
 {
+    public static event Action OnGameStart;
     public static event Action OnNimbusStart;
     public static event Action OnCloudLatched;
     public static event Action OnJumped;
@@ -20,4 +21,5 @@ public class NimbusEvents
     public static void TriggerOnResting() => OnResting?.Invoke();
     public static void TriggerOnFalling() => OnFalling?.Invoke();
     public static void TriggerOnGameEnd() => OnGameEnd?.Invoke();
+    public static void TriggerOnGameStart() => OnGameStart?.Invoke();
 }

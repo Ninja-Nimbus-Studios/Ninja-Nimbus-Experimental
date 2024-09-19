@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
         {
             SetRestGameStatus();
         }
+        NimbusEvents.TriggerOnGameStart();
+        PlayBGM();
     }
 
     // Setters functions
@@ -100,6 +102,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError($"The current game status doesn't allow RestartGame(). Current status is {status}");
         }
+
+        NimbusEvents.TriggerOnGameStart();
     }
 
     /*
@@ -137,5 +141,9 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
             PlayerPrefs.Save();
         }
+    }
+
+    public void PlayBGM(){
+        AudioManager.Instance.PlayMusic("BGM");
     }
 }
