@@ -1179,6 +1179,22 @@ PrefabInstance:
       propertyPath: verticalForce
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7463615071853717080, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+      propertyPath: maxVerticalForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463615071853717080, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+      propertyPath: minVerticalForce
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463615071853717080, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+      propertyPath: maxHorizontalForce
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463615071853717080, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+      propertyPath: minHorizontalForce
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8310957900257698950, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
       propertyPath: nimbus
       value: 
