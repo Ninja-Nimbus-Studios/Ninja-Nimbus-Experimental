@@ -5,22 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Unused Scenes/Stage 1-2.unity
-    guid: b5213a4297de8474684461db5c4aba2e
   - enabled: 1
-    path: Assets/Scenes/Unused Scenes/Level Selector.unity
-    guid: 834771b406956436ab81ed3dbcf49d01
-  - enabled: 1
-    path: Assets/Scenes/Unused Scenes/Stage 1-1.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Home.unity
+    guid: fb843f120c20e4a1ba0078c934301ee8
   - enabled: 1
     path: Assets/Scenes/Main Game Scene.unity
     guid: b90f8aedffed04bc7b1eb11a3c404e63
-  - enabled: 1
-    path: Assets/Scenes/Unused Scenes/Stage 2-2.unity
-    guid: 53f20ae9ac0bf466083b67ed8087159a
-  - enabled: 1
-    path: Assets/Scenes/Unused Scenes/Stage 2-3.unity
-    guid: 596c6fb6fcfd94b3d9eb89255aa53174
   m_configObjects: {}

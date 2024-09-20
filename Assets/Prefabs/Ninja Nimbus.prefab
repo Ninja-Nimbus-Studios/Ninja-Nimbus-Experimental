@@ -68,7 +68,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.63, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6014084339801533242}
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxCloudPower>k__BackingField: 100
-  <CloudPowerDepletionRate>k__BackingField: 10
-  <CloudRechargeRate>k__BackingField: 40
-  <CloudJumpDepletion>k__BackingField: 0
+  <CloudPowerDepletionRate>k__BackingField: 5
+  <CloudRechargeRate>k__BackingField: 35
+  <CloudJumpDepletion>k__BackingField: 20
 --- !u!114 &7463615071853717080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,8 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa2ddc78521f4af298bfff3ce4c858e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalForce: 11
-  horizontalForce: 8
+  verticalForce: 10
+  horizontalForce: 4
   rb: {fileID: 568723292962517267}
   leftBoundary: 0
   rightBoundary: 0

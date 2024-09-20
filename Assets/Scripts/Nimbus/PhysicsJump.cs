@@ -45,14 +45,10 @@ public class PhysicsJump : MonoBehaviour
             // Check for boundary collision
             if (transform.position.x <= leftBoundary)
             {
-                // Bounce off the left wall
-                Debug.Log("Nimbus is at wall!");
                 rb.velocity = new Vector2(Mathf.Abs(rb.velocity.x), rb.velocity.y); // Flip the x velocity
             }
             else if (transform.position.x >= rightBoundary)
             {
-                // Bounce off the right wall
-                Debug.Log("Nimbus is at wall!");
                 rb.velocity = new Vector2(-Mathf.Abs(rb.velocity.x), rb.velocity.y); // Flip the x velocity
             }
         }
