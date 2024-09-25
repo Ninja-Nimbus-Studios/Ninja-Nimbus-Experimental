@@ -21,9 +21,14 @@ public class PhysicsJump : MonoBehaviour
 
     const float JUMP_POWER_AT_0_ENERGY = 0f;
 
+    //Charge jump variables
+
     private float chargeStartTime;
     private bool isCharging;
-    private Vector2 touchPosition;
+    private Vector2 inputPosition;
+    private bool shouldJump;
+    private bool jumpDirection;
+    private float jumpChargeDuration;
 
     void Start()
     {
@@ -35,28 +40,32 @@ public class PhysicsJump : MonoBehaviour
 
     void Update()
     {
+        // Handle touch input (for mobile)
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
+            HandleInput(touch.phase, touch.position);
+        }
+        // Handle mouse input (for PC)
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                case TouchPhase.Began:
-                    chargeStartTime = Time.time;
-                    isCharging = true;
-                    touchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
-                    if (isCharging)
-                    {
-                        float chargeDuration = Mathf.Min(Time.time - chargeStartTime, maxChargeTime);
-                        Vector3 screenPoint = mainCamera.ScreenToWorldPoint(touchPosition);
-                        Jump(screenPoint.x > 0, chargeDuration);
-                        isCharging = false;
-                    }
-                    break;
+                HandleInput(TouchPhase.Began, Input.mousePosition);
             }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                HandleInput(TouchPhase.Ended, Input.mousePosition);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (shouldJump)
+        {
+            Jump(jumpDirection, jumpChargeDuration);
+            shouldJump = false;
         }
 
         if (isJumping)
@@ -70,6 +79,30 @@ public class PhysicsJump : MonoBehaviour
             {
                 rb.velocity = new Vector2(-Mathf.Abs(rb.velocity.x), rb.velocity.y);
             }
+        }
+    }
+
+    void HandleInput(TouchPhase phase, Vector2 position)
+    {
+        switch (phase)
+        {
+            case TouchPhase.Began:
+                chargeStartTime = Time.time;
+                isCharging = true;
+                inputPosition = position;
+                break;
+
+            case TouchPhase.Ended:
+                if (isCharging)
+                {
+                    float chargeDuration = Mathf.Min(Time.time - chargeStartTime, maxChargeTime);
+                    Vector3 screenPoint = mainCamera.ScreenToWorldPoint(inputPosition);
+                    shouldJump = true;
+                    jumpDirection = screenPoint.x > 0;
+                    jumpChargeDuration = chargeDuration;
+                    isCharging = false;
+                }
+                break;
         }
     }
 
