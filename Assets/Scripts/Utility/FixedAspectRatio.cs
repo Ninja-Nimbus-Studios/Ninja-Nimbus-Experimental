@@ -19,17 +19,12 @@ public class FixedAspectRatio : MonoBehaviour
     public bool ApplyPadding {get; private set;}
     [SerializeField] CanvasScalerController[] canvasScalerControllers; //we don't have that many so let's manually assign them
 
-    void Start()
-    {
-        cam = GetComponent<Camera>();
-        UpdateCameraRect();
-    }
-
     /// <summary>
     /// Updates the camera's viewport rectangle to maintain a fixed aspect ratio.
     /// </summary>
-    void UpdateCameraRect()
+    public void UpdateCameraRect()
     {
+        cam = GetComponent<Camera>();
         float windowAspect = (float)Screen.width / (float)Screen.height;
         ScaleHeight = windowAspect / targetAspect;
         ScaleWidth = 1.0f / ScaleHeight;

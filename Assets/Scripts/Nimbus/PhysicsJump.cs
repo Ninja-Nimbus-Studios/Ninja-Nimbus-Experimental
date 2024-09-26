@@ -13,9 +13,8 @@ public class PhysicsJump : MonoBehaviour
     [Header("Component References")]
     public Rigidbody2D rb;
     private bool isJumping;
-    private Camera mainCamera;
-    public float leftBoundary;
-    public float rightBoundary;
+    private Camera mainCamera => Camera.main;
+    private ViewManager viewManager;
     [SerializeField] CloudPower cloudPower;
     [SerializeField] Nimbus nimbus;
 
@@ -33,9 +32,7 @@ public class PhysicsJump : MonoBehaviour
     void Start()
     {
         PauseMovement();
-        mainCamera = Camera.main;
-        leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
-        rightBoundary = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
+        viewManager = Camera.main.GetComponent<ViewManager>();
     }
 
     void Update()
@@ -71,11 +68,11 @@ public class PhysicsJump : MonoBehaviour
         if (isJumping)
         {
             // Check for boundary collision
-            if (transform.position.x <= leftBoundary)
+            if (transform.position.x <= viewManager.LeftBoundary)
             {
                 rb.velocity = new Vector2(Mathf.Abs(rb.velocity.x), rb.velocity.y);
             }
-            else if (transform.position.x >= rightBoundary)
+            else if (transform.position.x >= viewManager.RightBoundary)
             {
                 rb.velocity = new Vector2(-Mathf.Abs(rb.velocity.x), rb.velocity.y);
             }
