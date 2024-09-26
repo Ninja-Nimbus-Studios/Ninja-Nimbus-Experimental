@@ -10,11 +10,14 @@ public class FixedAspectRatio : MonoBehaviour
     private float targetAspect => this.x / this.y;
     private Camera cam;
 
-    private float scaleHeight;
-    private float scaleWidth;
+    public float ScaleHeight{get; private set;}
+    public float ScaleWidth {get; private set;}
 
     // Reference to the UI container (usually the Canvas or a Panel)
     public RectTransform uiContainer;
+    public RectTransform canvasRect;
+    public bool ApplyPadding {get; private set;}
+    [SerializeField] CanvasScalerController[] canvasScalerControllers; //we don't have that many so let's manually assign them
 
     void Start()
     {
@@ -28,40 +31,50 @@ public class FixedAspectRatio : MonoBehaviour
     void UpdateCameraRect()
     {
         float windowAspect = (float)Screen.width / (float)Screen.height;
-        scaleHeight = windowAspect / targetAspect;
-        scaleWidth = 1.0f / scaleHeight;
+        ScaleHeight = windowAspect / targetAspect;
+        ScaleWidth = 1.0f / ScaleHeight;
 
-        if (scaleHeight < 1.0f) // current screen is taller
+        if (ScaleHeight < 1.0f) // current screen is taller
         {
             // wider screen, pad black to bot and top
             // adjust UI padding by rectTransform.anchorMin.y == 0 vs 1
             Rect rect = cam.rect;
             rect.width = 1.0f;
-            rect.height = scaleHeight;
-            var centerHeight = (1.0f - scaleHeight) / 2.0f;
+            rect.height = ScaleHeight;
+            var centerHeight = (1.0f - ScaleHeight) / 2.0f;
             rect.x = 0;
             rect.y = centerHeight;
             cam.rect = rect;
 
             Debug.Log($"Camsize: {cam.rect.size}, {cam.orthographicSize}");
-            // Apply vertical padding to UI elements
-            ApplyDynamicUIPadding(0, centerHeight * Screen.height);
+            
+            ApplyPaddingToCanvasScalerControllers();
         }
         else 
         {
             // wider screen, pad black to left and right
             // adjust UI padding by rectTransform.anchorMin.x == 0 vs 1
-            float scaleWidth = 1.0f / scaleHeight;
+            float ScaleWidth = 1.0f / ScaleHeight;
             Rect rect = cam.rect;
-            rect.width = scaleWidth;
+            rect.width = ScaleWidth;
             rect.height = 1.0f;
-            rect.x = (1.0f - scaleWidth) / 2.0f;
+            rect.x = (1.0f - ScaleWidth) / 2.0f;
             rect.y = 0;
             cam.rect = rect;
 
             Debug.Log($"Camsize: {cam.rect.size}, {cam.orthographicSize}");
-            // Apply horizontal padding to UI elements
-            ApplyDynamicUIPadding((1.0f - scaleWidth) / 2.0f * Screen.width, 0);
+
+            //do not apply padding
+        }
+        Debug.Log("ScaleHeight:" + ScaleHeight);
+        Debug.Log("ScaleWidth:" + ScaleWidth);
+    }
+
+    void ApplyPaddingToCanvasScalerControllers()
+    {
+        foreach (CanvasScalerController controller in canvasScalerControllers)
+        {
+            controller.AdjustCanvas(ScaleHeight);
         }
     }
 
@@ -81,7 +94,11 @@ public class FixedAspectRatio : MonoBehaviour
             Debug.Log($"Padding: {horizontalPadding}, {verticalPadding}");
             Debug.Log($"{Screen.width - horizontalPadding}, {Screen.height - verticalPadding}");
 
-            foreach (RectTransform ui in uiContainer.GetComponentsInChildren<RectTransform>())
+            if(canvasRect)
+            uiContainer.sizeDelta = canvasRect.sizeDelta;
+            uiContainer.anchorMin = new Vector2(0.5f, 0.5f + (1 - ScaleHeight) / 2);
+            uiContainer.anchorMax = new Vector2(0.5f, 0.5f - (1 - ScaleHeight) / 2);
+            /* foreach (RectTransform ui in uiContainer.GetComponentsInChildren<RectTransform>())
             {
                 if (ui.CompareTag("Paddable UI Component"))
                 {
@@ -123,7 +140,7 @@ public class FixedAspectRatio : MonoBehaviour
                         }
                     }
                 }
-            }
+            } */
         }
         else 
         {
@@ -135,16 +152,9 @@ public class FixedAspectRatio : MonoBehaviour
     /// Returns a Rect object representing the scaled viewport.
     /// This function is not being used right now. 
     /// </summary>
-    public Rect GetScaledRect()
+    public float GetScaleHeight()
     {
-        if (scaleHeight < 1.0f)
-        {
-            return new Rect(0, (1.0f - scaleHeight) / 2.0f, 1.0f, scaleHeight);
-        }
-        else
-        {
-            return new Rect((1.0f - scaleWidth) / 2.0f, 0, scaleWidth, 1.0f);
-        }
+        return ScaleHeight;
     }
 
 }

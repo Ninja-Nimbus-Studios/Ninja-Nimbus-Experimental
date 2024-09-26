@@ -462,7 +462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 9
   y: 16
-  uiContainer: {fileID: 817709260}
+  uiContainer: {fileID: 6932260226457149028}
+  canvasRect: {fileID: 817709260}
 --- !u!1 &520184261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,26 +1256,30 @@ PrefabInstance:
       objectReference: {fileID: 519420034}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055389446338023638, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3368660943629225109, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
