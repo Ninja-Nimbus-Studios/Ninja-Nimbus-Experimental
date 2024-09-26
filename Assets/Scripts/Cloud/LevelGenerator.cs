@@ -22,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
     private float rightEdge;
     private float leftEdge;
     private Camera mainCamera;
+    private ViewManager viewManager;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class LevelGenerator : MonoBehaviour
         leftEdge = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
         screenTop = mainCamera.ViewportToWorldPoint(new Vector3(0,1,0)).y;
         newScreenTop = screenTop;
+        viewManager = Camera.main.GetComponent<ViewManager>();
         // cloudHeight = cloudPrefab.GetComponent<MeshRenderer>().bounds.size.y; // MeshRenderer not working atm
     }
 
@@ -88,7 +90,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // X coordinate is randomly generated in between left and right screen edge
         // Y coordinate is randomly generated in between previous cloud y position and offset equivalent to screen top
-        float x = Random.Range(leftEdge, rightEdge);
+        float x = Random.Range(viewManager.LeftBoundary, viewManager.RightBoundary);
         float y = Random.Range(prevPosition.y + CLOUDHEIGHT, newScreenTop);
         float offset = y - prevPosition.y;
         newScreenTop += offset;
