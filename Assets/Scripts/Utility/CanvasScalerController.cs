@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//Not using this script because it doesn't work ;)
+// Not using this script because it doesn't work ;)
+// Oh NOOOOOOO.....
 public class CanvasScalerController : MonoBehaviour
 {
     public FixedAspectRatio fixedAspectRatio;

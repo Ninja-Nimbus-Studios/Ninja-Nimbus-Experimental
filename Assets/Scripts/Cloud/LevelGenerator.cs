@@ -72,7 +72,7 @@ public class LevelGenerator : MonoBehaviour
             }
             GameObject cloud = Instantiate(cloudPrefab, cloudPosition, Quaternion.identity, chunk.transform);
             prevCloudPosition = cloud.transform.position;
-            Debug.Log($"{prevCloudPosition}");
+            // Debug.Log($"{prevCloudPosition}");
             // Additional cloud setup if needed
         }
 
