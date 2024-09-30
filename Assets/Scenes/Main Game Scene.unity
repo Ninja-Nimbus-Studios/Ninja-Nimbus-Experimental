@@ -684,7 +684,16 @@ PrefabInstance:
       propertyPath: gameClearCanvas
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9166831711425518457, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
+      propertyPath: leftBoundOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166831711425518457, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
+      propertyPath: rightBoundOffset
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4227580693482459284, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
