@@ -15,6 +15,7 @@ public class LevelGenerator : MonoBehaviour
     private float highestChunkY = 0f;
     private float newScreenTop;
     private const float CLOUDHEIGHT = 1f;
+    private const float CLOUDWIDTH = 1f;
     private bool isFirstCloud = true;
     private System.Random random;
     private GameObject nimbus;
@@ -90,7 +91,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // X coordinate is randomly generated in between left and right screen edge
         // Y coordinate is randomly generated in between previous cloud y position and offset equivalent to screen top
-        float x = Random.Range(viewManager.LeftBoundary, viewManager.RightBoundary);
+        float x = Random.Range(viewManager.LeftBoundary + CLOUDWIDTH, viewManager.RightBoundary - CLOUDWIDTH);
         float y = Random.Range(prevPosition.y + CLOUDHEIGHT, newScreenTop);
         float offset = y - prevPosition.y;
         newScreenTop += offset;

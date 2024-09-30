@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxCloudPower>k__BackingField: 100
-  <CloudPowerDepletionRate>k__BackingField: 5
-  <CloudRechargeRate>k__BackingField: 35
-  <CloudJumpDepletion>k__BackingField: 20
+  <CloudPowerDepletionRate>k__BackingField: 0
+  <CloudRechargeRate>k__BackingField: 100
+  <CloudJumpDepletion>k__BackingField: 25
 --- !u!114 &7463615071853717080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,11 +256,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa2ddc78521f4af298bfff3ce4c858e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalForce: 10
-  horizontalForce: 4
+  minVerticalForce: 11
+  maxVerticalForce: 15
+  minHorizontalForce: 4
+  maxHorizontalForce: 6.5
+  maxChargeTime: 1
   rb: {fileID: 568723292962517267}
-  leftBoundary: 0
-  rightBoundary: 0
   cloudPower: {fileID: 2367673669169667313}
   nimbus: {fileID: 0}
 --- !u!114 &8310957900257698950
