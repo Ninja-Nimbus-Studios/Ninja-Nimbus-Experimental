@@ -11,6 +11,7 @@ public class CloudPower : MonoBehaviour
     [field: SerializeField] public float CloudRechargeRate { get; set; }
     [field: SerializeField] public float CloudJumpDepletion { get; set; }
     private CloudPowerDisplay cloudPowerDisplay;
+    [SerializeField] bool TestWithNoDepletion = false;
 
     private void Start()
     {
@@ -19,6 +20,12 @@ public class CloudPower : MonoBehaviour
         if(cloudPowerDisplay == null)
         {
             Debug.LogError("CloudPowerDisplay not found in scene!");
+        }
+
+        if(TestWithNoDepletion)
+        {
+            CloudJumpDepletion = 0;
+            CloudPowerDepletionRate = 0;
         }
     }
 

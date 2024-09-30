@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameInterface;
     public GameObject Nimbus;
 
+    public static bool isGamePaused = false;
+
     // public Tutorial tutorialObject;
     public HashSet<string> tutorialLevels = new HashSet<string>{"Stage 1-1"};
     public static bool isTutorial = false;

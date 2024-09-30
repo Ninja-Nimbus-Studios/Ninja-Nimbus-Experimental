@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    
+    [Header("Cloud Generation")]
     public GameObject cloudPrefab;
     public float chunkHeight;
     public int cloudsPerChunk;
     public float minCloudDistance;
     public float maxCloudDistance;
+    
+    [SerializeField]private float rightBoundOffset;
+    [SerializeField]private float leftBoundOffset;
 
     private Queue<GameObject> activeChunks = new Queue<GameObject>();
     private float highestChunkY = 0f;
@@ -19,10 +25,10 @@ public class LevelGenerator : MonoBehaviour
     private System.Random random;
     private GameObject nimbus;
     private float screenTop;
-    private float rightEdge;
     private float leftEdge;
     private Camera mainCamera;
     private ViewManager viewManager;
+    
 
     void Start()
     {
@@ -30,8 +36,6 @@ public class LevelGenerator : MonoBehaviour
         random = new System.Random(); // Or use a seed for reproducible levels
         GenerateInitialChunks();
         nimbus = GameObject.Find("Ninja Nimbus");
-        rightEdge = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
-        leftEdge = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
         screenTop = mainCamera.ViewportToWorldPoint(new Vector3(0,1,0)).y;
         newScreenTop = screenTop;
         viewManager = Camera.main.GetComponent<ViewManager>();
@@ -90,7 +94,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // X coordinate is randomly generated in between left and right screen edge
         // Y coordinate is randomly generated in between previous cloud y position and offset equivalent to screen top
-        float x = Random.Range(viewManager.LeftBoundary, viewManager.RightBoundary);
+        float x = Random.Range(viewManager.LeftBoundary + leftBoundOffset, viewManager.RightBoundary - rightBoundOffset);
         float y = Random.Range(prevPosition.y + CLOUDHEIGHT, newScreenTop);
         float offset = y - prevPosition.y;
         newScreenTop += offset;
