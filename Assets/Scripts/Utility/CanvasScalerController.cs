@@ -5,11 +5,15 @@ using UnityEngine.UI;
 // Oh NOOOOOOO.....
 public class CanvasScalerController : MonoBehaviour
 {
-    private RectTransform safeArea;
+    [SerializeField] RectTransform safeArea;
     [SerializeField] RectTransform canvasRect;
     public void AdjustCanvas(float scaleHeight)
     {
-        Initialize();
+        if (safeArea == null || canvasRect == null)
+        {
+            Debug.Log($"safeArea: {safeArea}, canvasRect: {canvasRect}");
+            Initialize();
+        }
         safeArea.sizeDelta = canvasRect.sizeDelta;
         safeArea.anchorMin = new Vector2(0.5f, 0.5f + (1 - scaleHeight) / 2);
         safeArea.anchorMax = new Vector2(0.5f, 0.5f - (1 - scaleHeight) / 2);

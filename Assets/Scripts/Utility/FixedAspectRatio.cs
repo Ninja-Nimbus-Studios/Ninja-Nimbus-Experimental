@@ -69,6 +69,7 @@ public class FixedAspectRatio : MonoBehaviour
     {
         foreach (CanvasScalerController controller in canvasScalerControllers)
         {
+            Debug.Log($"Controller: {controller}");
             controller.AdjustCanvas(ScaleHeight);
         }
     }
@@ -93,49 +94,6 @@ public class FixedAspectRatio : MonoBehaviour
             uiContainer.sizeDelta = canvasRect.sizeDelta;
             uiContainer.anchorMin = new Vector2(0.5f, 0.5f + (1 - ScaleHeight) / 2);
             uiContainer.anchorMax = new Vector2(0.5f, 0.5f - (1 - ScaleHeight) / 2);
-            /* foreach (RectTransform ui in uiContainer.GetComponentsInChildren<RectTransform>())
-            {
-                if (ui.CompareTag("Paddable UI Component"))
-                {
-                    Debug.Log($"Working with {ui.name}");
-                    // For screens that need vertical padding (i.e., screen is taller)
-                    if (verticalPadding > 0)
-                    {
-                        if (ui.anchorMin.y < 0.5f)
-                        {
-                            Debug.Log($"{ui.name}: anchored at bottom!");
-                            // Anchored to bottom, apply offset to bottom edge
-                            ui.offsetMin = new Vector2(ui.offsetMin.x, ui.offsetMin.y + verticalPadding);
-                        }
-                        else if (ui.anchorMin.y >= 0.5f)
-                        {
-                            Debug.Log($"{ui.name}: anchored at top!");
-                            // Anchored to top, apply offset to top edge
-                            ui.offsetMax = new Vector2(ui.offsetMax.x, ui.offsetMax.y - verticalPadding);
-                        }
-                    }
-                    // For screens that need horizontal padding (i.e., screen is wider)
-                    else if (horizontalPadding > 0)
-                    {
-                        if (ui.anchorMin.x < 0.5f)
-                        {
-                            Debug.Log($"{ui.name}: anchored at left!");
-                            // Anchored to left, apply offset to left edge
-                            Debug.Log($"Before Adjustment:{ui.anchoredPosition}, {ui.anchorMin}, {ui.offsetMin}");
-                            ui.offsetMin = new Vector2(ui.offsetMin.x + horizontalPadding, ui.offsetMin.y);
-                            Debug.Log($"After Adjustment:{ui.anchoredPosition}, {ui.anchorMin}, {ui.offsetMin}");
-                        }
-                        else if (ui.anchorMin.x >= 0.5f)
-                        {
-                            Debug.Log($"{ui.name}: anchored at right!");
-                            // Anchored to right, apply offset to right edge
-                            Debug.Log($"Before Adjustment:{ui.anchoredPosition}, {ui.anchorMax}, {ui.offsetMax}");
-                            ui.offsetMax = new Vector2(ui.offsetMax.x - horizontalPadding, ui.offsetMax.y);
-                            Debug.Log($"After Adjustment:{ui.anchoredPosition}, {ui.anchorMax}, {ui.offsetMax}");
-                        }
-                    }
-                }
-            } */
         }
         else 
         {
