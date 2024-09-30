@@ -17,6 +17,7 @@ public class PhysicsJump : MonoBehaviour
     private ViewManager viewManager;
     [SerializeField] CloudPower cloudPower;
     [SerializeField] Nimbus nimbus;
+    [SerializeField] RectTransform cloudPowerBar;
 
     const float JUMP_POWER_AT_0_ENERGY = 0f;
 
@@ -149,12 +150,45 @@ public class PhysicsJump : MonoBehaviour
     {
         bool isFacingRight = transform.localScale.x > 0;
 
+        // keep cloud power bar same orientation 
+        // Vector3 barScale = cloudPowerBar.localScale;
+        // cloudPowerBar.localScale = new Vector3(Mathf.Abs(barScale.x), barScale.y, barScale.z);
+
         Vector3 scale = transform.localScale;
         if ((isFacingRight && !isJumpingRight) || (!isFacingRight && isJumpingRight))
         {
+            // flip nimbus according to jump
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+            UpdateHealthBarPosition();
+            UpdateHealthBarScale(); 
         }
     }
+
+    void UpdateHealthBarPosition()
+    {
+        // Get Nimbus's current scale
+        bool isFacingRight = transform.localScale.x > 0;
+        
+        // Adjust the health bar's local position based on Nimbus's facing direction
+        Vector3 healthBarPos = cloudPowerBar.localPosition;
+        
+        if (isFacingRight)
+        {
+            // Keep the health bar on the positive x-side
+            cloudPowerBar.localPosition = new Vector3(Mathf.Abs(healthBarPos.x), healthBarPos.y, healthBarPos.z);
+        }
+        else
+        {
+            // Flip the health bar's position to ensure it doesn't flip with Nimbus
+            cloudPowerBar.localPosition = new Vector3(-Mathf.Abs(healthBarPos.x), healthBarPos.y, healthBarPos.z);
+        }
+    }
+    void UpdateHealthBarScale()
+    {
+        Vector3 healthBarScale = cloudPowerBar.localScale;
+        cloudPowerBar.localScale = new Vector3(Mathf.Abs(healthBarScale.x), healthBarScale.y, healthBarScale.z);
+    }
+
 
     void PauseMovement()
     {
