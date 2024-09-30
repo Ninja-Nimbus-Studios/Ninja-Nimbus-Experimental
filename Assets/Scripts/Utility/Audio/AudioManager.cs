@@ -79,5 +79,25 @@ public class AudioManager : Singleton<AudioManager>
         musicSource.Stop();
     }
 
+    public void TurnOnMusic()
+    {
+        musicSource.mute = false;
+    }
+
+    public void TurnOffMusic()
+    {
+        musicSource.mute = true;
+    }
+
+    public void TurnOnSound()
+    {
+        sfxSource.mute = false;
+    }
+
+    public void TurnOffSound()
+    {
+        sfxSource.mute = true;
+    }
+
 
 }

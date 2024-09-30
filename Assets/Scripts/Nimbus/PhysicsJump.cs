@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PhysicsJump : MonoBehaviour
@@ -28,6 +29,8 @@ public class PhysicsJump : MonoBehaviour
     private bool shouldJump;
     private bool jumpDirection;
     private float jumpChargeDuration;
+    private bool jumpFalling = false;
+
 
     void Start()
     {
@@ -37,6 +40,10 @@ public class PhysicsJump : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.isGamePaused)
+        {
+            return;
+        }
         // Handle touch input (for mobile)
         if (Input.touchCount > 0)
         {
@@ -44,27 +51,14 @@ public class PhysicsJump : MonoBehaviour
             HandleInput(touch.phase, touch.position);
         }
         // Handle mouse input (for PC)
-        else
+        else if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HandleInput(TouchPhase.Began, Input.mousePosition);
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                HandleInput(TouchPhase.Ended, Input.mousePosition);
-            }
+            HandleInput(Input.GetMouseButtonDown(0) ? TouchPhase.Began : TouchPhase.Ended, Input.mousePosition);
         }
     }
 
     void FixedUpdate()
     {
-        if (shouldJump)
-        {
-            Jump(jumpDirection, jumpChargeDuration);
-            shouldJump = false;
-        }
-
         if (isJumping)
         {
             // Check for boundary collision
@@ -77,6 +71,13 @@ public class PhysicsJump : MonoBehaviour
                 rb.velocity = new Vector2(-Mathf.Abs(rb.velocity.x), rb.velocity.y);
             }
         }
+
+        if (!jumpFalling && rb.velocity.y < 0)
+        {
+            jumpFalling = true;
+            NimbusEvents.TriggerOnJumpFalling();
+        }
+
     }
 
     void HandleInput(TouchPhase phase, Vector2 position)
@@ -94,9 +95,11 @@ public class PhysicsJump : MonoBehaviour
                 {
                     float chargeDuration = Mathf.Min(Time.time - chargeStartTime, maxChargeTime);
                     Vector3 screenPoint = mainCamera.ScreenToWorldPoint(inputPosition);
-                    shouldJump = true;
                     jumpDirection = screenPoint.x > 0;
                     jumpChargeDuration = chargeDuration;
+                    Jump(jumpDirection, jumpChargeDuration);
+                    Debug.Log("Jumpped");
+                    jumpFalling = false;
                     isCharging = false;
                 }
                 break;
@@ -114,6 +117,11 @@ public class PhysicsJump : MonoBehaviour
         rb.isKinematic = false;
         rb.velocity = Vector2.zero;
 
+        if (chargeDuration < 0.2f)
+        {
+            // prevent taps that are too short to be counted as a charge
+            chargeDuration = 0;
+        }
         float t = chargeDuration / maxChargeTime;
         float verticalForce = Mathf.Lerp(minVerticalForce, maxVerticalForce, t);
         float horizontalForce = Mathf.Lerp(minHorizontalForce, maxHorizontalForce, t);
@@ -139,8 +147,6 @@ public class PhysicsJump : MonoBehaviour
         {
             NimbusEvents.TriggerOnJumped();
         }
-
-        Debug.Log($"XForce:{horizontalForce}, YForce:{verticalForce}, ChargeTime:{chargeDuration}");
         rb.AddForce(new Vector2(horizontalForce, verticalForce), ForceMode2D.Impulse);
         isJumping = true;
     }
