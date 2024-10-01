@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class CloudLayerTrigger : MonoBehaviour
+public class NextLayerTrigger : MonoBehaviour
 {
     public BackgroundController backgroundController;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Ninja Nimbus"))
+        if (other.gameObject.name == "Cloud Layer")
         {
             // Trigger big leap and next background loading
             backgroundController.LoadNextBackground();
-            PerformBigLeap(other.gameObject);
+            // PerformBigLeap(other.gameObject);
         }
     }
 

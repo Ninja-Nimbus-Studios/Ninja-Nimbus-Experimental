@@ -49,7 +49,6 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 4529018978746538683, guid: 6970842a26cfd43a2aa77c386ecbc32e, type: 3}
   gameInterface: {fileID: 5595073918728164145, guid: 9e4f078628ab940d0a7bacfe1d86756c, type: 3}
   Nimbus: {fileID: 1392045764045924827, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
-  tutorialObject: {fileID: 0}
 --- !u!114 &4227580693482459284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,3 +81,5 @@ MonoBehaviour:
   cloudsPerChunk: 5
   minCloudDistance: 2
   maxCloudDistance: 4
+  rightBoundOffset: 0
+  leftBoundOffset: 0

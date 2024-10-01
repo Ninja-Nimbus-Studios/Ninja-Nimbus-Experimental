@@ -37,6 +37,7 @@ public class NimbusLatch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"{other.gameObject.name}");
 
         // Check if the other collider is one of the left or right points
         if (other.gameObject.name == "Point Right" || other.gameObject.name == "Point Left")
@@ -46,7 +47,6 @@ public class NimbusLatch : MonoBehaviour
             {
                 // Latch to the right side of the cloud
                 latchTarget = other.transform.position;
-                Debug.Log($"Right: {latchTarget}");
 
                 //Check Flip
                 Flip(true);
@@ -55,7 +55,6 @@ public class NimbusLatch : MonoBehaviour
             {
                 // Latch to the left side of the cloud
                 latchTarget = other.transform.position;
-                Debug.Log($"Left: {latchTarget}");
 
                 //Check Flip
                 Flip(false);

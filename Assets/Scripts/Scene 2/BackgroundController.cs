@@ -3,8 +3,9 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour
 {
     public GameObject[] backgrounds; // Your 7 background prefabs
-    public GameObject cloudLayer;    // Cloud layer to trigger transition
+    public GameObject cameraStopper;
     private int currentBackgroundIndex = 0;
+    public GameObject backgroundGroup;
 
     void Start()
     {
@@ -16,8 +17,11 @@ public class BackgroundController : MonoBehaviour
         // Dynamically instantiate the next background 
         if (currentBackgroundIndex < backgrounds.Length)
         {
+            Debug.Log("Next Background is rendering");
             Instantiate(backgrounds[currentBackgroundIndex], new Vector3(0, CalculateNextPosition(), 0), Quaternion.identity);
             currentBackgroundIndex++;
+        } else {
+            Debug.LogError("No more background available!");
         }
     }
 
@@ -25,7 +29,9 @@ public class BackgroundController : MonoBehaviour
     {
         // Logic to calculate the position for the next background
         // You could use the current background's height and position to calculate this
-        float backgroundHeight = 10f; // Example value; adjust based on actual background size
-        return transform.position.y + backgroundHeight;
+        float previousTop = cameraStopper.transform.position.y;
+        float backgroundHeight = backgroundGroup.GetComponent<SpriteRenderer>().bounds.size.y;
+        Debug.Log($"{previousTop}, {backgroundHeight}");
+        return previousTop + backgroundHeight;
     }
 }

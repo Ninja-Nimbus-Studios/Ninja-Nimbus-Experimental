@@ -1,4 +1,3 @@
-// UNUSED
 // Logic to trigger death when Nimbus reaches the left or right border of screen
 
 using UnityEditor;
@@ -12,24 +11,34 @@ public class CharacterMonitor : MonoBehaviour
     public float bottomBoundary; // Bottom boundary of the screen
     public GameManager gameManager; // Reference to the GameManager
     private Camera mainCamera;
+    private bool shouldFollow;
 
     void Start()
     {
         mainCamera = Camera.main;
         leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
         rightBoundary = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
+        shouldFollow = true;
     }
 
     void Update()
     {
-        bottomBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
-        // Check if the character's position is beyond the left boundary
-        // if (character.position.x < leftBoundary || character.position.x > rightBoundary)
-        if(character.position.y < bottomBoundary)
+        if (shouldFollow)
         {
-            // Call the GameOver function in the GameManager
-            Debug.Log("Game is OVER!");
-            gameManager.GameOver();
+            bottomBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+            // Check if the character's position is beyond the left boundary
+            // if (character.position.x < leftBoundary || character.position.x > rightBoundary)
+            if(character.position.y < bottomBoundary)
+            {
+                // Call the GameOver function in the GameManager
+                gameManager.GameOver();
+                StopFollowing();
+            }
         }
+    }
+    
+    public void StopFollowing()
+    {
+        shouldFollow = false;
     }
 }
