@@ -9,7 +9,7 @@ public class NextLayerTrigger : MonoBehaviour
         if (other.gameObject.name == "Cloud Layer")
         {
             // Trigger big leap and next background loading
-            backgroundController.LoadNextBackground();
+            // backgroundController.LoadNextBackground();
             // PerformBigLeap(other.gameObject);
         }
     }

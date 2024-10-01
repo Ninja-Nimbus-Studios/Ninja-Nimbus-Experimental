@@ -11,19 +11,19 @@ public class CharacterMonitor : MonoBehaviour
     public float bottomBoundary; // Bottom boundary of the screen
     public GameManager gameManager; // Reference to the GameManager
     private Camera mainCamera;
-    private bool shouldFollow;
+    private bool gameContinues;
 
     void Start()
     {
         mainCamera = Camera.main;
         leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0,0,0)).x;
         rightBoundary = mainCamera.ViewportToWorldPoint(new Vector3(1,0,0)).x;
-        shouldFollow = true;
+        gameContinues = true;
     }
 
     void Update()
     {
-        if (shouldFollow)
+        if (gameContinues)
         {
             bottomBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
             // Check if the character's position is beyond the left boundary
@@ -32,13 +32,8 @@ public class CharacterMonitor : MonoBehaviour
             {
                 // Call the GameOver function in the GameManager
                 gameManager.GameOver();
-                StopFollowing();
+                gameContinues = false;
             }
         }
-    }
-    
-    public void StopFollowing()
-    {
-        shouldFollow = false;
     }
 }

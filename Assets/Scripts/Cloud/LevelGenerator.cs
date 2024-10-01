@@ -78,6 +78,7 @@ public class LevelGenerator : MonoBehaviour
             }
             GameObject cloud = Instantiate(cloudPrefab, cloudPosition, Quaternion.identity, chunk.transform);
             prevCloudPosition = cloud.transform.position;
+            // Debug.Log($"{cloud.transform.Find("Point Left").GetComponentInChildren<CapsuleCollider2D>().enabled}, {cloud.transform.Find("Point Right").GetComponentInChildren<CapsuleCollider2D>().enabled}");
             // Debug.Log($"{prevCloudPosition}");
             // Additional cloud setup if needed
         }

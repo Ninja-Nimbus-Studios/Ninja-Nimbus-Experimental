@@ -1,37 +1,35 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BackgroundController : MonoBehaviour
 {
-    public GameObject[] backgrounds; // Your 7 background prefabs
     public GameObject cameraStopper;
-    private int currentBackgroundIndex = 0;
-    public GameObject backgroundGroup;
+    public GameObject backgroundPrefab; // Drag the background prefab into this field in the Inspector
+    public Sprite[] backgroundSprites;  // Assign your background sprites here in the Inspector
+    private float backgroundHeight = 11f;
+    private int spriteIndex = 0;
 
-    void Start()
+    // Function to instantiate the background with a specific sprite int spriteIndex, Vector3 position
+    public void CreateNewBackground(Vector3 position)
     {
-        LoadNextBackground();
-    }
-
-    public void LoadNextBackground()
-    {
-        // Dynamically instantiate the next background 
-        if (currentBackgroundIndex < backgrounds.Length)
+        if (spriteIndex < 0 || spriteIndex >= backgroundSprites.Length)
         {
-            Debug.Log("Next Background is rendering");
-            Instantiate(backgrounds[currentBackgroundIndex], new Vector3(0, CalculateNextPosition(), 0), Quaternion.identity);
-            currentBackgroundIndex++;
-        } else {
-            Debug.LogError("No more background available!");
+            Debug.LogError("Sprite index out of range.");
+            return;
         }
-    }
 
-    private float CalculateNextPosition()
-    {
-        // Logic to calculate the position for the next background
-        // You could use the current background's height and position to calculate this
-        float previousTop = cameraStopper.transform.position.y;
-        float backgroundHeight = backgroundGroup.GetComponent<SpriteRenderer>().bounds.size.y;
-        Debug.Log($"{previousTop}, {backgroundHeight}");
-        return previousTop + backgroundHeight;
+        position += new Vector3(0, backgroundHeight, 0);
+
+        // Instantiate the background prefab
+        GameObject newBackground = Instantiate(backgroundPrefab, position, Quaternion.identity);
+
+        // Assign the desired sprite
+        SpriteRenderer spriteRenderer = newBackground.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Debug.Log($"Assigned new sprite: {backgroundSprites[spriteIndex]}");
+            spriteRenderer.sprite = backgroundSprites[spriteIndex];
+            spriteIndex++;
+        }
     }
 }

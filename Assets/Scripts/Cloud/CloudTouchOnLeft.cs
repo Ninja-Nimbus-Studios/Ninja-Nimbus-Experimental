@@ -15,9 +15,13 @@ public class CloudTouchOnLeft : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("On Left side");
-        Score.score++;
+        Debug.Log($"Trigger Entered by {collision.gameObject.name}");
+        if (collision.gameObject.name == "Ninja Nimbus")
+        {
+            Score.score++;
 
-        rCollider.enabled = false;
+            rCollider.enabled = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
