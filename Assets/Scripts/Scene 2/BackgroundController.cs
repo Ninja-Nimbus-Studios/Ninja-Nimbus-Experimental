@@ -10,26 +10,26 @@ public class BackgroundController : MonoBehaviour
     private int spriteIndex = 0;
 
     // Function to instantiate the background with a specific sprite int spriteIndex, Vector3 position
-    public void CreateNewBackground(Vector3 position)
-    {
-        if (spriteIndex < 0 || spriteIndex >= backgroundSprites.Length)
-        {
-            Debug.LogError("Sprite index out of range.");
-            return;
-        }
+    // public void CreateNewBackground(Vector3 position)
+    // {
+    //     if (spriteIndex < 0 || spriteIndex >= backgroundSprites.Length)
+    //     {
+    //         Debug.LogError("Sprite index out of range.");
+    //         return;
+    //     }
 
-        position += new Vector3(0, backgroundHeight, 0);
+    //     position += new Vector3(0, backgroundHeight, 0);
 
-        // Instantiate the background prefab
-        GameObject newBackground = Instantiate(backgroundPrefab, position, Quaternion.identity);
+    //     // Instantiate the background prefab
+    //     GameObject newBackground = Instantiate(backgroundPrefab, position, Quaternion.identity);
 
-        // Assign the desired sprite
-        SpriteRenderer spriteRenderer = newBackground.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            Debug.Log($"Assigned new sprite: {backgroundSprites[spriteIndex]}");
-            spriteRenderer.sprite = backgroundSprites[spriteIndex];
-            spriteIndex++;
-        }
-    }
+    //     // Assign the desired sprite
+    //     SpriteRenderer spriteRenderer = newBackground.GetComponent<SpriteRenderer>();
+    //     if (spriteRenderer != null)
+    //     {
+    //         Debug.Log($"Assigned new sprite: {backgroundSprites[spriteIndex]}");
+    //         spriteRenderer.sprite = backgroundSprites[spriteIndex];
+    //         spriteIndex++;
+    //     }
+    // }
 }

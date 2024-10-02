@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
   m_FlipX: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb7ef045fc344eaa41467a43c91004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFollowScript: {fileID: 5462589209811746418, guid: cf5ef0d0d38b7433f858fd6a7b197222, type: 3}
+  cameraScript: {fileID: 0}
   backgroundManager: {fileID: 3029996183482286169, guid: e8518de1a35ac44f3acf4d37993b8de0, type: 3}
 --- !u!1001 &6723606766914534056
 PrefabInstance:
@@ -196,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 3845898370918419397, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_Name
       value: Cloud Layer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209254895536735373, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
+      propertyPath: m_LayerOverridePriority
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5326105508943767710, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_LocalScale.x
@@ -215,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5326105508943767710, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.72
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 5326105508943767710, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_LocalPosition.z
