@@ -805,7 +805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1676301109}
   background: {fileID: 614481906}
-  parallaxFactor: 0.027
+  parallaxFactor: 0.08
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,11 +1533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9166831711425518457, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
       propertyPath: leftBoundOffset
-      value: 2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 9166831711425518457, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
       propertyPath: rightBoundOffset
-      value: 2
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4227580693482459284, guid: da9638fd6492a436a9aac67f2b309c15, type: 3}
