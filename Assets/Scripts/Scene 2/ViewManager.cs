@@ -9,7 +9,7 @@ public class ViewManager : MonoBehaviour
     FixedAspectRatio fixedAspectRatio;
     public float LeftBoundary {get; private set;}
     public float RightBoundary {get; private set;}
-
+    // private bool shouldFollow;
 
     void Start()
     {
@@ -17,19 +17,28 @@ public class ViewManager : MonoBehaviour
         fixedAspectRatio = GetComponent<FixedAspectRatio>();
         ApplyLetterboxPadding();
         SetBoundary();
+        // shouldFollow = true;
     }
 
     private void LateUpdate()
     {
-        if(target.position.y > transform.position.y)
-        {
-            Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
-            transform.position = newPosition;
+        // if (shouldFollow)
+        // {
+            if(target.position.y > transform.position.y)
+            {
+                Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
+                transform.position = newPosition;
 
-            Vector3 backgroundNewPosition = new Vector3(transform.position.x, target.position.y - target.position.y * parallaxFactor, transform.position.z);
-            background.position = backgroundNewPosition + backgroundOffset;
-        }
+                Vector3 backgroundNewPosition = new Vector3(transform.position.x, target.position.y - target.position.y * parallaxFactor, transform.position.z);
+                background.position = backgroundNewPosition + backgroundOffset;
+            }
+        // }
     }
+
+    // public void StopFollowing()
+    // {
+    //     shouldFollow = false;
+    // }
 
     public void ApplyLetterboxPadding()
     {

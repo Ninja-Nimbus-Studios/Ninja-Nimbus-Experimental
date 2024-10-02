@@ -98,7 +98,6 @@ public class PhysicsJump : MonoBehaviour
                     jumpDirection = screenPoint.x > 0;
                     jumpChargeDuration = chargeDuration;
                     Jump(jumpDirection, jumpChargeDuration);
-                    Debug.Log("Jumpped");
                     jumpFalling = false;
                     isCharging = false;
                 }

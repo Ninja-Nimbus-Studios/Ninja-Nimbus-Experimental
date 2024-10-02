@@ -59,13 +59,11 @@ public class GameManager : MonoBehaviour
     // Setters functions
     public void SetRestGameStatus()
     {
-        Debug.Log("GameManager: Rest game status set!");
         PlayerPrefs.SetString("Status", STATUS_REST);
     }
 
     public void SetTutorialGameStatus()
     {
-        Debug.Log("GameManager: Tutorial game status set!");
         PlayerPrefs.SetString("Status", STATUS_TUTORIAL);
     }
 

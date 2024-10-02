@@ -40,8 +40,6 @@ public class FixedAspectRatio : MonoBehaviour
             rect.x = 0;
             rect.y = centerHeight;
             cam.rect = rect;
-
-            Debug.Log($"Camsize: {cam.rect.size}, {cam.orthographicSize}");
             
             ApplyPaddingToCanvasScalerControllers();
         }
@@ -57,12 +55,8 @@ public class FixedAspectRatio : MonoBehaviour
             rect.y = 0;
             cam.rect = rect;
 
-            Debug.Log($"Camsize: {cam.rect.size}, {cam.orthographicSize}");
-
             //do not apply padding
         }
-        Debug.Log("ScaleHeight:" + ScaleHeight);
-        Debug.Log("ScaleWidth:" + ScaleWidth);
     }
 
     void ApplyPaddingToCanvasScalerControllers()
