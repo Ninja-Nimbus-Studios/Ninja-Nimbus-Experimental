@@ -5,4 +5,4 @@
 ![](https://img.shields.io/badge/docs-stable-green)
 # The Adventure of Ninja Nimbus - Experimental
 
-This is a repo to experiment with design choices on Ninja Nimbus Game
+The Adventure of Ninja Nimbus is a mobile action game. It's a infinite jumper game where users try to jump higher and higher to get your best score.
