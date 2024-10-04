@@ -40,7 +40,7 @@ public class PhysicsJump : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.isGamePaused)
+        if (GameManager.isGamePaused || nimbus.NimbusState == NimbusState.InTransition)
         {
             return;
         }
