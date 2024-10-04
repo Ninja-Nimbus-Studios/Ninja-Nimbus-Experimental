@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraScript: {fileID: 0}
-  backgroundManager: {fileID: 3029996183482286169, guid: e8518de1a35ac44f3acf4d37993b8de0, type: 3}
+  backgroundManager: {fileID: 0}
 --- !u!1001 &6723606766914534056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,10 +196,6 @@ PrefabInstance:
     - target: {fileID: 3845898370918419397, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_Name
       value: Cloud Layer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5209254895536735373, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
-      propertyPath: m_LayerOverridePriority
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5326105508943767710, guid: 77dcb2458dc0049cab04da6d29215d8d, type: 3}
       propertyPath: m_LocalScale.x

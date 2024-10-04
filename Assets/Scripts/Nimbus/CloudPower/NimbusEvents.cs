@@ -14,6 +14,7 @@ public class NimbusEvents
     public static event Action OnResting;
     public static event Action OnFalling;
     public static event Action OnGameEnd;
+    public static event Action OnStageChange;
 
     public static void TriggerOnNimbusStart() => OnNimbusStart?.Invoke();
     public static void TriggerOnCloudLatched() => OnCloudLatched?.Invoke();
@@ -24,4 +25,5 @@ public class NimbusEvents
     public static void TriggerOnFalling() => OnFalling?.Invoke();
     public static void TriggerOnGameEnd() => OnGameEnd?.Invoke();
     public static void TriggerOnGameStart() => OnGameStart?.Invoke();
+    public static void TriggerOnStageChange() => OnStageChange?.Invoke();
 }
