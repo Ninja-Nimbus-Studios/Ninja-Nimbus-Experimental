@@ -10,6 +10,8 @@ public class Nimbus : MonoBehaviour
     public void SwitchStateToJumping() => SwitchStateTo(NimbusState.Jumping);
     public void SwitchStateToLatching() => SwitchStateTo(NimbusState.Latching);
     public void SwitchStateToFalling() => SwitchStateTo(NimbusState.Falling);
+    public void SwitchStateToIdle() => SwitchStateTo(NimbusState.Idle);
+    public void SwitchStateToTransition() => SwitchStateTo(NimbusState.InTransition);
     public void SwitchStateTo(NimbusState newState){
         NimbusState = newState;
     }
@@ -60,5 +62,6 @@ public enum NimbusState{
     Idle,
     Jumping,
     Latching,
-    Falling
+    Falling,
+    InTransition
 }

@@ -38,6 +38,11 @@ public class NimbusLatch : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"{other.gameObject.name}");
+        // Do not latch when in transition
+        if (nimbus.NimbusState == NimbusState.InTransition)
+        {
+            return;
+        }
 
         // Check if the other collider is one of the left or right points
         if (other.gameObject.name == "Point Right" || other.gameObject.name == "Point Left")
