@@ -11,6 +11,7 @@ public class CloudPower : MonoBehaviour
     [field: SerializeField] public float CloudRechargeRate { get; set; }
     [field: SerializeField] public float CloudJumpDepletion { get; set; }
     private CloudPowerDisplay cloudPowerDisplay;
+    private float currentCloudPowerRate;
     [SerializeField] bool TestWithNoDepletion = false;
 
     private void Start()
@@ -59,5 +60,18 @@ public class CloudPower : MonoBehaviour
         if(CurrentCloudPower > 0 && CurrentCloudPower < 10){
             CurrentCloudPower = 0;
         }
+    }
+
+    public void StopDepleting(){
+        if(CloudPowerDepletionRate != 0){
+            currentCloudPowerRate = CloudPowerDepletionRate;
+        }
+        CloudPowerDepletionRate = 0;
+        Debug.Log($"Stop: {currentCloudPowerRate}, {CloudPowerDepletionRate}");
+    }
+
+    public void ContinueDepleting(){
+        CloudPowerDepletionRate = currentCloudPowerRate;
+        Debug.Log($"Continue: {currentCloudPowerRate}, {CloudPowerDepletionRate}");
     }
 }

@@ -9,6 +9,9 @@ public class TransitionEntry : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Ninja Nimbus")
-        sceneTransition.BeginNimbusTransition();
+        {
+            sceneTransition.BeginNimbusTransition();
+            Debug.Log($"Transition Entry: {gameObject.name}");
+        }
     }
 }

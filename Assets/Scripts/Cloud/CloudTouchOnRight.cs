@@ -15,7 +15,7 @@ public class CloudTouchOnRight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Trigger Entered by {collision.gameObject.name}");
+        // Debug.Log($"Trigger Entered by {collision.gameObject.name}");
         if (collision.gameObject.name == "Ninja Nimbus")
         {
             Score.score++;
