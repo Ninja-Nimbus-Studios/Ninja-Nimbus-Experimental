@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverCanvas;
     public GameObject gameInterface;
     public GameObject Nimbus;
+    public Timer timer;
 
     public static bool isGamePaused = false;
 
