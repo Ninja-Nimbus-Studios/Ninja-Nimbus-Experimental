@@ -24,7 +24,7 @@ public class NimbusLatch : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, latchTarget, latchSpeed * Time.deltaTime);
 
             // Check if Nimbus has reached the latch point
-            if (Vector2.Distance(transform.position, latchTarget) < 0.1f)
+            if (Vector2.Distance(transform.position, latchTarget) < 0.01f)
             {
                 CompleteLatch();
             }
