@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -20,6 +21,8 @@ public class AudioManager : Singleton<AudioManager>
     public Sound[] sounds;
     public AudioSource musicSource;
     public AudioSource sfxSource;
+    [SerializeField] private Toggle SoundToggle;
+    [SerializeField] private Toggle MusicToggle;
 
     private Dictionary<string, Sound> soundDictionary = new Dictionary<string, Sound>();
 
@@ -27,12 +30,30 @@ public class AudioManager : Singleton<AudioManager>
     {
         base.Awake();
         InitializeSoundDictionary();
+        InitializeAudioAccordingToToggle();
     }
     private void InitializeSoundDictionary()
     {
         foreach (Sound sound in sounds)
         {
             soundDictionary[sound.name] = sound;
+        }
+    }
+
+    private void InitializeAudioAccordingToToggle(){
+        if(PlayerPrefs.HasKey("Sound")){
+            SetSound(PlayerPrefs.GetInt("Sound") == 1);
+            SoundToggle.isOn = PlayerPrefs.GetInt("Sound") == 1;
+        }else{
+            SetSound(true);
+            SoundToggle.isOn = true;
+        }
+        if(PlayerPrefs.HasKey("Music")){
+            SetMusic(PlayerPrefs.GetInt("Music") == 1);
+            MusicToggle.isOn = PlayerPrefs.GetInt("Music") == 1;
+        }else{
+            SetMusic(true);
+            MusicToggle.isOn = true;
         }
     }
 
@@ -97,6 +118,14 @@ public class AudioManager : Singleton<AudioManager>
     public void TurnOffSound()
     {
         sfxSource.mute = true;
+    }
+
+    public void SetSound(bool on){
+        sfxSource.mute = !on;
+    }
+
+    public void SetMusic(bool on){
+        musicSource.mute = !on;
     }
 
 
